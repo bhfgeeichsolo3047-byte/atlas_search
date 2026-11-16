@@ -21,7 +21,7 @@ import path from 'node:path';
 import {
   CONFIG_PATH, EFFORTS, ATLAS_DIR,
   loadConfig, writeConfig, configView, resolveApiKey,
-  normalizeModels, embeddingModelsFromList,
+  normalizeModels, embeddingModelsFromList, toggleDisabled,
 } from '../config.mjs';
 
 const CATALOG = path.join(ATLAS_DIR, 'catalog.json');
@@ -115,16 +115,14 @@ async function models() {
 }
 
 async function toggle(action) {
-  const refs = process.argv.slice(2).filter((x) => !x.startsWith('--'));
+  // argv[2] 是子命令本身（disable / enable），从 argv[3] 起才是 ref。
+  const refs = process.argv.slice(3).filter((x) => !x.startsWith('--'));
   if (!refs.length) {
     console.error(`${action} 后面跟要开关的 ref，如 skill/apk-unpack tool/subagent`);
     process.exit(1);
   }
   const cur = loadConfig();
-  const pick = (arr) => (action === 'disable'
-    ? [...new Set([...arr, ...refs])]
-    : arr.filter((x) => !refs.includes(x)));
-  const next = await writeConfig({ disabled: { skills: pick(cur.disabled.skills), tools: pick(cur.disabled.tools) } });
+  const next = await writeConfig({ disabled: toggleDisabled(cur.disabled, action, refs, loadCatalog().tools) });
   console.log(`OK ${action}: ${refs.join(', ')}`);
   console.log(JSON.stringify(next.disabled, null, 2));
 }

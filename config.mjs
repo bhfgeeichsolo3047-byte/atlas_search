@@ -242,3 +242,51 @@ export function configView(cfg) {
     hideDisabledInBrowse: c.hideDisabledInBrowse,
   };
 }
+
+
+// 把一批 ref / name 归类到 disabled.skills 与 disabled.tools。
+// 归类依据：catalog 里 kind === 'skill' 的进 skills，其余进 tools；目录里查不到时退回 ref 前缀
+// （skill/... 进 skills）。disable 只写对的那一侧，避免同一条同时出现在两个数组里。
+export function toggleDisabled(cur, action, refs, tools) {
+  const table = tools || {};
+  const byName = new Map();
+  for (const [ref, t] of Object.entries(table)) if (t && t.name) byName.set(t.name, t);
+
+  const entries = [];
+  for (const raw of refs || []) {
+    const key = String(raw == null ? '' : raw).trim();
+    if (!key) continue;
+    const t = table[key] || byName.get(key);
+    entries.push({
+      key,
+      ref: t ? t.ref : key,
+      name: t && t.name ? t.name : null,
+      kind: t && t.kind ? t.kind : null,
+    });
+  }
+
+  const isSkill = (e) => (e.kind ? e.kind === 'skill' : String(e.ref).startsWith('skill/'));
+
+  if (action === 'disable') {
+    const skills = entries.filter(isSkill).map((e) => e.ref);
+    const others = entries.filter((e) => !isSkill(e)).map((e) => e.ref);
+    return {
+      skills: [...new Set([...cur.skills, ...skills])],
+      tools: [...new Set([...cur.tools, ...others])],
+    };
+  }
+
+  // enable：ref、name、以及调用方原本写的那串 key 三者在两侧一起清，
+  // 这样历史上被写脏（同一条同时进了 skills 和 tools）也能一次清干净。
+  const dead = new Set();
+  for (const e of entries) {
+    dead.add(e.key);
+    dead.add(e.ref);
+    if (e.name) dead.add(e.name);
+  }
+  return {
+    skills: cur.skills.filter((x) => !dead.has(x)),
+    tools: cur.tools.filter((x) => !dead.has(x)),
+  };
+}
+

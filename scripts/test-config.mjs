@@ -226,6 +226,13 @@ async function main() {
     await s.call('atlas_config', { action: 'set', reasoningEffort: 'high' });
 
     // 5) 禁用清单
+    const dis1 = await s.call('atlas_config', { action: 'disable', refs: ['skill/apk-unpack', 'tool/subagent'] });
+    ok('disable 按 kind 归类', JSON.stringify(dis1.parsed.disabled) === JSON.stringify({ skills: ['skill/apk-unpack'], tools: ['tool/subagent'] }), dis1.parsed.disabled);
+    ok('disable 不把子命令名写进清单', !JSON.stringify(dis1.parsed.disabled).includes('"disable"'), dis1.parsed.disabled);
+    const disName = await s.call('atlas_config', { action: 'disable', refs: ['apk-unpack'] });
+    ok('按 name 禁用也归到 skills', JSON.stringify(disName.parsed.disabled) === JSON.stringify({ skills: ['skill/apk-unpack'], tools: ['tool/subagent'] }), disName.parsed.disabled);
+    const disEn = await s.call('atlas_config', { action: 'enable', refs: ['apk-unpack', 'tool/subagent'] });
+    ok('enable 两侧同步清空', disEn.parsed.disabled.skills.length === 0 && disEn.parsed.disabled.tools.length === 0, disEn.parsed.disabled);
     await s.call('atlas_config', { action: 'disable', refs: ['skill/apk-unpack'] });
     const dis = await s.call('atlas_search', { query: 'classes.dex 异常小 脱壳', topK: 5 });
     ok('禁用项不进检索结果', !(dis.parsed.top || []).some((t) => t.ref === 'skill/apk-unpack'), (dis.parsed.top || []).map((t) => t.ref));

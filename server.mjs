@@ -13,7 +13,7 @@ import { discoverAll, buildProposal, loadState, saveState, loadCatalogFile } fro
 import {
   ATLAS_DIR, CONFIG_PATH, EFFORTS, DEFAULT_CONFIG,
   loadConfig, writeConfig, configView, effortProfile,
-  resolveApiKey, lexScore, normalizeModels, embeddingModelsFromList,
+  resolveApiKey, lexScore, normalizeModels, embeddingModelsFromList, toggleDisabled,
 } from './config.mjs';
 
 const VERSION = '1.1.0';
@@ -988,10 +988,9 @@ async function callTool(name, args) {
       const cur = cfg();
       const list = Array.isArray(args.refs) ? args.refs.map(String) : [];
       if (!list.length) fail('disable / enable 需要 refs 数组');
-      const pick = (arr) => (action === 'disable'
-        ? [...new Set([...arr, ...list])]
-        : arr.filter((x) => !list.includes(x)));
-      const next = await writeConfig({ disabled: { skills: pick(cur.disabled.skills), tools: pick(cur.disabled.tools) } });
+      // 按 catalog 的 kind 归类：skill 进 disabled.skills，其余进 disabled.tools，
+      // 避免同一条 ref 同时写进两个数组（旧写法会）。
+      const next = await writeConfig({ disabled: toggleDisabled(cur.disabled, action, list, loadCatalog().tools) });
       return { content: [{ type: 'text', text: JSON.stringify({ ok: true, action, disabled: next.disabled }, null, 2) }] };
     }
     return { content: [{ type: 'text', text: JSON.stringify({ ok: true, action: 'get', config: configView(cfg()) }, null, 2) }] };
