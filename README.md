@@ -109,7 +109,74 @@ atlas 走的是 embedding 语义匹配：工具被总结成「特点 + 应用场
 | `tool/mnemon_document_search` | 5 |
 <!-- AUTOGEN:ATLAS_SNAPSHOT_END -->
 
-## 十一个工具
+## 配置层：供应商 / 思考强度 / 禁用 / 回退
+
+四件事全部落在 `config.json`（默认在 `ATLAS_DIR` 下，仓库布局下就是仓库根的 `config.json`，**已在 `.gitignore` 里**，只提交 `config.example.json`）。服务按文件 `mtime` 热加载，改完下一个请求就生效，不需要重启 DSH。
+
+```json
+{
+  "embedding": { "baseUrl": "https://api.siliconflow.cn/v1", "apiKey": "", "model": "Qwen/Qwen3-Embedding-4B" },
+  "reasoningEffort": "high",
+  "useLlmFallback": false,
+  "disabled": { "skills": [], "tools": [] },
+  "hideDisabledInBrowse": false
+}
+```
+
+优先级：`config.json` 里的非空值 > 环境变量（含 Windows 用户作用域注册表兜底）> 内置默认值。
+
+**① 向量供应商可配置**
+
+`baseUrl` 只要兼容 OpenAI 的 `POST /embeddings`，`model` 填该供应商的 embedding 模型 id。换供应商不必改代码：
+
+```bash
+node scripts/config-cli.mjs models                 # 拉 /models，只列 embedding 模型
+node scripts/config-cli.mjs models --all           # 连非 embedding 一起列
+node scripts/config-cli.mjs models --save bge-m3   # 选中并立即生效
+```
+
+识别规则不靠单一正则：先看响应元数据（`type` / `sub_type` / `pipeline_tag` / `capabilities` / `details.family` 里是否含 embed），元数据缺失再退回 id 正则（`embed` / `bge-` / `e5-` / `gte-` / `nomic-embed` / `mxbai-embed` / `text-embedding` / `qwen3-embedding` 等），并一律排除 `rerank`。这样 OpenAI 只有 `id`、Ollama 有 `details.family`、SiliconFlow 有 `type/sub_type` 三种响应都能正确分类。
+
+**② 技能与工具可禁用**
+
+`disabled.skills` / `disabled.tools` 按 `ref`（`skill/apk-unpack`）或 `name`（`apk-unpack`）匹配。语义是「当前会话里不该被推荐给我用」，不是「从目录里删掉」：
+
+| 入口 | 禁用后的表现 |
+|---|---|
+| `atlas_search` | 直接从候选里剔除，返回体带 `disabledExcluded` 计数 |
+| `atlas_browse` / `atlas_detail` | 默认保留并标 `disabled: true`（目录是事实，推荐才是策略） |
+| 同上，但 `hideDisabledInBrowse: true` | 浏览时也隐藏，等价于「当它不存在」 |
+
+```bash
+node scripts/config-cli.mjs disable skill/apk-unpack tool/subagent
+node scripts/config-cli.mjs enable  skill/apk-unpack
+node scripts/config-cli.mjs entries --kind skill    # 列出可禁用的 ref
+```
+
+**③ 四档思考强度（默认 `high`）**
+
+| 档位 | 路径层 | 场景精排 | 词元混合 | 回吐体积 |
+|---|---|---|---|---|
+| `low` | 前 2 | 关 | 0 | 每条候选只给前 2 条 `scenes` |
+| `medium` | 前 4 | 开（软最大值） | 0 | 完整 `scenes` |
+| `high`（默认） | 前 4 | 开 | 0.06 | 完整 `scenes` + `scoreBreakdown` + `pathLabels` |
+| `xhigh` | 前 6 | 开 + 候选池放大到 `topK*3`（下限 24）再按场景 top3 均值精排 | 0.10 | 额外 `matchedScenes`、完整 `invoke` / `avoid` / 路径名 |
+
+`low` 到 `high` 只影响召回精度与回吐体积，不改变打分口径本身；`xhigh` 会真的改变排序（放大池子后用「场景 top3 均值」重排）。
+
+**④ 不用向量模型，改由大模型直读（`useLlmFallback`）**
+
+置 `true` 后 `atlas_search` 走**硬短路**：这条路径里不出现任何 `embed` / `embedBatch` / `vecForFill` 调用 —— 即使配了 Key 也一个请求都不发。只按字面重合度（英文按词、中文按二元组）排序，把候选**原文**按思考强度分档回吐：`low` 前 12 条精简、`medium` 前 20、`high` 前 40 并附分类概览、`xhigh` 全量含完整字段。返回体带 `mode: "llm-fallback"` 与 `embeddingBypassed: true`，`auditProtocol` 照常保留 —— 判断权仍然在主模型手里。
+
+同一开关也作用于写入侧：`atlas_upsert` / `atlas_link` / `atlas_commit` 跳过向量预热（返回 `embeddingSkipped: true`），`atlas_reindex` 直接短路。适合「没有 Key / 不想付费 / 只想让模型读目录」的场合。
+
+```bash
+node scripts/config-cli.mjs set --llm-fallback on
+node scripts/config-cli.mjs set --effort xhigh
+node scripts/config-cli.mjs show
+```
+
+## 十三个工具
 
 | 工具 | 用途 |
 |---|---|
@@ -124,6 +191,8 @@ atlas 走的是 embedding 语义匹配：工具被总结成「特点 + 应用场
 | `atlas_propose` | 把待归纳条目整理成主模型可读的材料（frontmatter + 正文摘要 + 附带文件 / MCP 工具名与描述），不做归类判断 |
 | `atlas_commit` | 主模型归纳完，整批写进 catalog（内部走 upsertEntry，自动建分类、双向挂载、预热向量、状态转 indexed） |
 | `atlas_ignore` | 标记某条「不收」，之后不再进待归纳队列；`reset` 撤销 |
+| `atlas_config` | 读写 `config.json`：向量供应商 / 模型 / Key / 思考强度 / 禁用清单 / 回退开关。改完即时生效，不用重启宿主 |
+| `atlas_models` | 拉供应商的 `GET /models`，自动标出哪些是 embedding 模型；`applyModel` 一键切换 |
 
 ### 检索结果里的 `auditProtocol`
 
@@ -192,7 +261,9 @@ max 模式：     top1 22/25、top3 23/25、top5 25/25
 
 ```
 .
-├── server.mjs              MCP 服务本体（stdio，零依赖，11 个工具）
+├── server.mjs              MCP 服务本体（stdio，零依赖，13 个工具）
+├── config.mjs              共享配置层（热加载 / 优先级 / 思考强度 / 模型识别）
+├── config.example.json     配置模板（真正的 config.json 不入库）
 ├── discover.mjs            发现层本体（约定扫描 + 指纹比对 + 提案材料整理，零依赖）
 ├── discover-cli.mjs        发现层命令行
 ├── catalog.json            三层目录数据（10 个总分类 / 30 个子分类 / 128 条工具）
@@ -202,7 +273,7 @@ max 模式：     top1 22/25、top3 23/25、top5 25/25
 │   ├── DEBUGLOG.md         完整调试过程：每一轮的假设、实测、踩坑与修法
 │   ├── TUNING.md           调参方法论：25 条基准、floor/cap 推导过程
 │   └── DESIGN.md           设计取舍：为什么三路向量、为什么发现层不判断
-└── scripts/                19 个调试与自检脚本（见下表）
+└── scripts/                21 个调试与自检脚本（见下表）
 ```
 
 `scripts/` 下各脚本：
@@ -223,6 +294,8 @@ max 模式：     top1 22/25、top3 23/25、top5 25/25
 | `selftest.mjs` | 协议与工程自检（17 项断言） |
 | `test-discover.mjs` | 发现层端到端自测（34 项断言，走真实 stdio JSON-RPC） |
 | `doc-check.mjs` | 文档一致性校验 + 快照块生成（`--write`） |
+| `config-cli.mjs` | 配置命令行：`show` / `set` / `models` / `disable` / `enable` / `entries` |
+| `test-config.mjs` | 配置层端到端自测（本地 mock 向量服务，42 项断言） |
 
 ## 快速开始
 
@@ -237,7 +310,18 @@ cp catalog.json vectors.json discover-state.json ~/.dsh/tool-atlas/
 
 想从零开始则跳过复制，直接用 `scripts/seed.mjs` 播种，再 `scripts/reindex.mjs --force` 建向量。
 
-**2. 设 API Key**
+**2. 配供应商与 Key**
+
+推荐写进 `config.json`（改完即时生效，也不会因为宿主重启丢掉）：
+
+```bash
+cp config.example.json config.json          # 仓库布局下就是仓库根
+node scripts/config-cli.mjs set --api-key sk-xxx
+node scripts/config-cli.mjs set --base-url https://api.siliconflow.cn/v1 --model Qwen/Qwen3-Embedding-4B
+node scripts/config-cli.mjs models          # 不确定有哪些 embedding 模型时先看一眼
+```
+
+也可以用环境变量（优先级低于 `config.json`）：
 
 ```bash
 export SILICONFLOW_API_KEY=...   # 任意 OpenAI 兼容 embeddings 端点的 key
@@ -259,14 +343,21 @@ env:     ATLAS_EMBED_MODEL=Qwen/Qwen3-Embedding-4B
 ```bash
 node scripts/selftest.mjs        # 17 项协议自检
 node scripts/test-discover.mjs   # 34 项发现层自检
+node scripts/test-config.mjs     # 42 项配置层自检（本地 mock 向量服务）
 node scripts/compare.mjs         # 25 条检索基准
 node scripts/doc-check.mjs       # 文档与数据一致性
 ```
 
 ## 环境变量
 
+`config.json` 里给了非空值就以配置为准，环境变量是兜底（便于 CI / 容器一次性注入）。
+
 | 变量 | 默认 | 作用 |
 |---|---|---|
+| `ATLAS_CONFIG` | `<ATLAS_DIR>/config.json` | 配置文件路径 |
+| `ATLAS_REASONING_EFFORT` | `high` | 思考强度兜底：`low` / `medium` / `high` / `xhigh` |
+| `ATLAS_LLM_FALLBACK` | 关 | 设 `1` 等于 `useLlmFallback: true` |
+| `ATLAS_HIDE_DISABLED` | 关 | 设 `1` 等于 `hideDisabledInBrowse: true` |
 | `SILICONFLOW_API_KEY` | — | embedding 授权（也可用 `ATLAS_API_KEY`） |
 | `ATLAS_EMBED_MODEL` | `Qwen/Qwen3-Embedding-4B` | 向量模型 |
 | `ATLAS_BASE_URL` / `EMBED_BASE_URL` | `https://api.siliconflow.cn/v1` | OpenAI 兼容 API 端点 |

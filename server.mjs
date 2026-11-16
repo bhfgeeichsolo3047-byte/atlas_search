@@ -1,22 +1,27 @@
 #!/usr/bin/env node
 // dsh-tool-atlas —— 本地工具库向量目录 MCP 服务（stdio，零依赖）
 // 三层目录: 总目录(分类) -> 子分类 -> 工具详述；一个工具可挂多个 (分类,子分类) 路径
-// 向量: siliconflow Qwen/Qwen3-Embedding-4B (OpenAI 兼容 /embeddings)
-// 授权: 复用 SILICONFLOW_API_KEY（与 embed-router 同源）
+// 向量: 供应商 / 模型 / Key 全部来自 config.json（OpenAI 兼容 /embeddings），改完即时生效
+// 授权: config.json > SILICONFLOW_API_KEY / ATLAS_API_KEY > Windows 用户作用域注册表
 import { createInterface } from 'node:readline';
 import { promises as fsp } from 'node:fs';
-import { existsSync, mkdirSync, readFileSync } from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { mkdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import os from 'node:os';
 import { discoverAll, buildProposal, loadState, saveState, loadCatalogFile } from './discover.mjs';
+import {
+  ATLAS_DIR, CONFIG_PATH, EFFORTS, DEFAULT_CONFIG,
+  loadConfig, writeConfig, configView, effortProfile,
+  resolveApiKey, lexScore, normalizeModels, embeddingModelsFromList,
+} from './config.mjs';
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 const NAME = 'dsh-tool-atlas';
-const MODEL = process.env.ATLAS_EMBED_MODEL || 'Qwen/Qwen3-Embedding-4B';
-const BASE = (process.env.EMBED_BASE_URL || process.env.ATLAS_BASE_URL || 'https://api.siliconflow.cn/v1').replace(/\/+$/, '');
-const ATLAS_DIR = process.env.ATLAS_DIR || path.join(os.homedir(), '.dsh', 'tool-atlas');
+// 配置每次用到时读一次（mtime 未变走缓存）：换模型、换供应商、改思考强度都不需要重启进程。
+const cfg = () => loadConfig();
+const modelId = () => cfg().embedding.model;
+const baseUrl = () => cfg().embedding.baseUrl;
 const CATALOG = path.join(ATLAS_DIR, 'catalog.json');
 const VECTORS = path.join(ATLAS_DIR, 'vectors.json');
 const BATCH = 16;
@@ -30,26 +35,15 @@ function num(v, d) { const n = Number(v); return Number.isFinite(n) ? n : d; }
 // ---------------- embedding ----------------
 const memCache = new Map();
 // 环境变量兜底：DSH 从 GUI 启动时进程 env 是启动那一刻的快照，
-// 如果 API Key 是之后才写进 User 作用域的，这里就取不到 —— 直接从注册表 HKCU\Environment 捞一次。
-function resolveKey() {
-  const direct = process.env.SILICONFLOW_API_KEY || process.env.ATLAS_API_KEY;
-  if (direct) return direct;
-  if (process.platform !== 'win32') return '';
-  try {
-    const out = execFileSync('reg', ['query', 'HKCU\\Environment', '/v', 'SILICONFLOW_API_KEY'],
-      { encoding: 'utf8', timeout: 8000, windowsHide: true });
-    const m = out.match(/REG_(?:EXPAND_)?SZ\s+(.+)/);
-    if (m) { const v = m[1].trim(); process.env.SILICONFLOW_API_KEY = v; return v; }
-  } catch {}
-  return '';
-}
+// 如果 API Key 是之后才写进 User 作用域的，这里就取不到 —— config.mjs 会去注册表捞一次。
+function resolveKey() { return resolveApiKey(cfg()); }
 async function embedBatch(texts) {
   const key = resolveKey();
-  if (!key) fail('SILICONFLOW_API_KEY 未设置。请先在系统环境变量里配置 siliconflow API Key 后重启 DSH。');
-  const res = await fetch(`${BASE}/embeddings`, {
+  if (!key) fail('还没有可用的 API Key：用 config-cli set --api-key <KEY> 写进 config.json，或设置环境变量 SILICONFLOW_API_KEY。');
+  const res = await fetch(baseUrl() + '/embeddings', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` },
-    body: JSON.stringify({ model: MODEL, input: texts }),
+    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + key },
+    body: JSON.stringify({ model: modelId(), input: texts }),
   });
   if (!res.ok) {
     const body = await res.text().catch(() => '');
@@ -63,14 +57,14 @@ async function embed(texts) {
   const out = new Array(texts.length);
   const todo = [];
   for (let i = 0; i < texts.length; i++) {
-    const k = sha(`${MODEL} ${texts[i]}`);
+    const k = sha(modelId() + ' ' + texts[i]);
     const hit = memCache.get(k);
     if (hit) out[i] = hit; else todo.push(i);
   }
   for (let i = 0; i < todo.length; i += BATCH) {
     const idxs = todo.slice(i, i + BATCH);
     const vecs = await embedBatch(idxs.map((ix) => texts[ix]));
-    idxs.forEach((ix, j) => { memCache.set(sha(`${MODEL} ${texts[ix]}`), vecs[j]); out[ix] = vecs[j]; });
+    idxs.forEach((ix, j) => { memCache.set(sha(modelId() + ' ' + texts[ix]), vecs[j]); out[ix] = vecs[j]; });
   }
   return out;
 }
@@ -95,14 +89,14 @@ async function saveVecDisk() {
   try { await fsp.writeFile(tmp, JSON.stringify(vecDisk)); await fsp.rename(tmp, VECTORS); vecDirty = false; } catch {}
 }
 function vecFor(text) {
-  const k = sha(`${MODEL} ${text}`);
+  const k = sha(modelId() + ' ' + text);
   const d = loadVecDisk();
   if (d[k]) return Float32Array.from(d[k]);
   const m = memCache.get(k);
   return m || null;
 }
 async function vecForFill(text) {
-  const k = sha(`${MODEL} ${text}`);
+  const k = sha(modelId() + ' ' + text);
   const d = loadVecDisk();
   if (d[k]) return Float32Array.from(d[k]);
   const [v] = await embed([text]);
@@ -113,7 +107,7 @@ async function vecForFill(text) {
 // 批量版：把所有未命中的文本去重后一次性交给 embed()（内部按 BATCH=16 分片），
 // 比逐条 vecForFill 少几十次 HTTP 往返。返回值与入参顺序一一对应。
 async function vecForMany(texts) {
-  const keys = texts.map((t) => sha(`${MODEL} ${String(t || '')}`));
+  const keys = texts.map((t) => sha(modelId() + ' ' + String(t || '')));
   const d = loadVecDisk();
   const miss = [];
   const seen = new Set();
@@ -132,6 +126,8 @@ async function vecForMany(texts) {
 }
 // 预热一条工具的全部向量：三路 + 逐条场景，一次批量落盘。
 async function warmTool(ref, t) {
+  // 回退模式下不做向量化：用户明确要求「不调向量模型」时，录入也必须遵守。
+  if (cfg().useLlmFallback) return null;
   const f = toolFields(ref, t);
   const vecs = await vecForMany([f.name, f.traits, f.scenes, ...f.sceneList]);
   await saveVecDisk();
@@ -265,17 +261,116 @@ function upsertEntry(args, c) {
   return entry;
 }
 
-// ---------------- 检索 ----------------
-async function searchTools(query, { topK = 8, category = null, sub = null, minScore = 0 } = {}) {
+// ---------------- 禁用清单 ----------------
+// 语义是「当前会话里不该被推荐给我用」，不是「从目录里删掉」：
+// atlas_search 直接剔除（不推荐禁用项），atlas_browse / atlas_detail 默认保留并标 disabled，
+// 因为目录是事实，推荐才是策略。hideDisabledInBrowse=true 时才连浏览也隐藏。
+function disabledRefs(c) {
+  const d = cfg().disabled;
+  const want = new Set([...d.skills, ...d.tools].map((x) => String(x || '').trim()).filter(Boolean));
+  const hit = new Set();
+  if (!want.size) return hit;
+  for (const ref of Object.keys(c.tools || {})) {
+    const t = c.tools[ref];
+    if (want.has(ref) || (t && want.has(t.name))) hit.add(ref);
+  }
+  return hit;
+}
+
+// 按思考强度裁剪摘要体积：low 只回前 2 条场景，high/xhigh 回完整 scenes。
+// pathLabels 只在 high 及以上给：路径名是弱信号，低档没必要占体积。
+function summaryFor(t, profile, c, matchedScenes) {
+  const s = summary(t);
+  if (profile.sceneDetail < 99 && Array.isArray(s.scenes) && s.scenes.length > profile.sceneDetail) {
+    s.scenes = s.scenes.slice(0, profile.sceneDetail);
+    s.scenesTruncated = true;
+  }
+  if (profile.breakdown) {
+    s.pathLabels = (t.categories || []).map(([a, b]) => {
+      const cat = (c.categories || []).find((x) => x.id === a);
+      const sb = cat && (cat.subs || []).find((x) => x.id === b);
+      return [cat && cat.name, sb && sb.name].filter(Boolean).join(' > ') || (a + '/' + b);
+    });
+  }
+  if (matchedScenes && matchedScenes.length) s.matchedScenes = matchedScenes;
+  return s;
+}
+
+// ---------------- 大模型直读模式（useLlmFallback） ----------------
+// 硬短路：这条路径里不出现 embed / embedBatch / vecForFill —— 即使配了 Key 也一个请求都不发。
+// 只用字面重合度排序（tokens/lexScore 是纯字符串计算），按思考强度决定回吐多少原文：
+//   low 前 12 条精简 / medium 前 20 条 / high 前 40 条含分类概览 / xhigh 全量 + 完整字段。
+function fallbackSearch(query, { topK = 8, category = null, sub = null, minScore = 0 } = {}) {
   const c = loadCatalog();
+  const profile = effortProfile(cfg());
+  const dis = disabledRefs(c);
   const refs = Object.keys(c.tools).filter((ref) => {
+    if (dis.has(ref)) return false;
     const t = c.tools[ref];
     if (!category) return true;
     return (t.categories || []).some(([a, b]) => a === category && (!sub || b === sub));
   });
-  if (!refs.length) return { model: MODEL, top: [], note: '目录为空或该分类下没有工具' };
+  const ranked = refs.map((ref) => {
+    const t = c.tools[ref];
+    const f = toolFields(ref, t);
+    return { ref, t, lex: lexScore(query, [f.name, f.traits, f.scenes].join(' ')) };
+  }).sort((a, b) => b.lex - a.lex || a.ref.localeCompare(b.ref));
+  const limit = profile.fallbackLimit > 0 ? profile.fallbackLimit : ranked.length;
+  const want = Math.max(Math.max(topK, 1), limit);
+  const picked = ranked.slice(0, Math.min(want, ranked.length));
+  const slim = profile.fallbackLimit > 0 && !profile.breakdown;
+  const top = picked.map(({ t, lex }) => {
+    if (slim) {
+      const s = summaryFor(t, profile, c);
+      return {
+        ref: s.ref, name: s.name, display: s.display, kind: s.kind,
+        traits: s.traits, scenes: s.scenes, paths: s.paths, lexMatch: +lex.toFixed(4),
+      };
+    }
+    return { ...summaryFor(t, profile, c), score: +lex.toFixed(4), lexMatch: +lex.toFixed(4) };
+  }).filter((x) => (minScore > 0 ? x.lexMatch >= minScore : true));
+  const body = {
+    mode: 'llm-fallback',
+    embeddingBypassed: true,
+    reasoningEffort: cfg().reasoningEffort,
+    model: modelId(),
+    top,
+    total: ranked.length,
+    hint: '向量检索已被关闭（useLlmFallback=true）：这里没有余弦分数，只有按字面重合度排的候选原文。读 scenes/avoid 自己判断，不要当成排序结论。',
+    instruction: '按 scenes 是否命中当前子目标、avoid 是否触发、kind/invoke 在当前会话是否可用这三步筛；都不合适就改写 query 再看一次，或直接动手。',
+    auditProtocol: AUDIT_PROTOCOL,
+  };
+  if (profile.breakdown) {
+    // high / xhigh 额外给分类概览：没有向量时，主模型靠目录结构定位比靠词面更快。
+    body.categories = (c.categories || []).map((cat) => ({
+      id: cat.id, name: cat.name,
+      subs: (cat.subs || []).map((s) => ({
+        id: s.id, name: s.name,
+        tools: (s.tools || []).filter((r) => !dis.has(r)).length,
+      })),
+    }));
+  }
+  return body;
+}
 
-  // 1) 路径层：先按 总分类/子分类 语义定位
+// ---------------- 检索 ----------------
+async function searchTools(query, { topK = 8, category = null, sub = null, minScore = 0 } = {}) {
+  const c = loadCatalog();
+  const conf = cfg();
+  const profile = effortProfile(conf);
+  if (conf.useLlmFallback) return fallbackSearch(query, { topK, category, sub, minScore });
+  const dis = disabledRefs(c);
+  const refs = Object.keys(c.tools).filter((ref) => {
+    if (dis.has(ref)) return false;
+    const t = c.tools[ref];
+    if (!category) return true;
+    return (t.categories || []).some(([a, b]) => a === category && (!sub || b === sub));
+  });
+  if (!refs.length) {
+    return { model: modelId(), mode: 'vector', top: [], note: '目录为空、该分类下没有工具，或候选全被禁用清单挡掉了' };
+  }
+
+  // 1) 路径层：先按 总分类/子分类 语义定位（保留几条由思考强度决定）
   const pathEntries = [];
   for (const cat of c.categories) {
     for (const sb of cat.subs || []) pathEntries.push({ cat, sub: sb, text: pathText(cat, sb) });
@@ -287,9 +382,9 @@ async function searchTools(query, { topK = 8, category = null, sub = null, minSc
     pathScored.push({ cat: p.cat.id, sub: p.sub.id, score: +cosine(qv, v).toFixed(4) });
   }
   pathScored.sort((a, b) => b.score - a.score);
-  const pathTop = pathScored.slice(0, 4);
+  const pathTop = pathScored.slice(0, Math.max(profile.pathTop, 1));
   const pathBoost = new Map();
-  pathTop.forEach((p, i) => pathBoost.set(`${p.cat}/${p.sub}`, Math.max(0, 0.05 - i * 0.012)));
+  pathTop.forEach((p, i) => pathBoost.set(p.cat + '/' + p.sub, Math.max(0, 0.05 - i * 0.012)));
 
   // 2) 工具层：名称/特点/场景三路向量 + 路径加成
   // 打分模式两种：
@@ -300,7 +395,7 @@ async function searchTools(query, { topK = 8, category = null, sub = null, minSc
   const W_T = num(process.env.ATLAS_W_TRAIT, 0.24);
   const W_N = num(process.env.ATLAS_W_NAME, 0.21);
   const MODE = process.env.ATLAS_SCORE_MODE || 'weighted';
-  const sceneMax = process.env.ATLAS_SCENE_MAX !== '0';
+  const sceneMax = profile.sceneMax;
   for (const ref of refs) {
     const t = c.tools[ref];
     const f = toolFields(ref, t);
@@ -310,39 +405,88 @@ async function searchTools(query, { topK = 8, category = null, sub = null, minSc
     // 纯 max 会让无关工具靠某一条偶然相似的场景词冒头（噪声），纯均值又会把强命中稀释掉，
     // 所以用 0.75*max + 0.25*mean：强命中的场景仍主导，但单条孤证要打折。
     let sbest = ss;
+    let sceneCos = null;
     if (sceneMax && f.sceneList.length > 1) {
       const list = await vecForMany(f.sceneList);
       let mx = -1, sum = 0, n = 0;
-      for (const v of list) { if (!v) continue; const c2 = cosine(qv, v); sum += c2; n++; if (c2 > mx) mx = c2; }
+      sceneCos = [];
+      for (let i = 0; i < list.length; i++) {
+        const v = list[i];
+        if (!v) continue;
+        const c2 = cosine(qv, v);
+        sceneCos.push({ text: f.sceneList[i], cos: c2 });
+        sum += c2; n++; if (c2 > mx) mx = c2;
+      }
       if (n) { const mean = sum / n; sbest = mx * 0.75 + mean * 0.25; }
       if (ss > sbest) sbest = ss;
+      if (sceneCos) sceneCos.sort((a, b) => b.cos - a.cos);
     }
-    let s;
-    if (MODE === 'max') {
-      // max 模式下，名称维度命中专有名词权重略高，避免纯场景泛化
-      s = Math.max(sbest, st, sn * 1.02);
-    } else {
-      s = sbest * W_S + st * W_T + sn * W_N;
-    }
-    for (const [a, b] of t.categories || []) s += pathBoost.get(`${a}/${b}`) || 0;
+    // 词元重合度：向量对专有名词/命令名不敏感，这里按字面重合补一路（权重由思考强度给，high 只给 0.06）。
+    const lex = profile.lexWeight > 0 ? lexScore(query, [f.name, f.traits, f.scenes].join(' ')) : 0;
+    const base = MODE === 'max'
+      ? Math.max(sbest, st, sn * 1.02) + lex * profile.lexWeight
+      : sbest * W_S + st * W_T + sn * W_N + lex * profile.lexWeight;
+    let boost = 0;
+    for (const [a, b] of t.categories || []) boost += pathBoost.get(a + '/' + b) || 0;
     // 通用兜底工具（t.floor > 0）：给它一个分数下限，保证它总能进入候选名单，
     // 但不超过强语义命中，避免抢掉精准工具的位置。主模型看到候选后再决定用不用。
-    if (t.floor > 0 && s < t.floor) s = t.floor;
     // 语义泛化型工具（t.cap > 0）：给它一个分数上限，防止「检索/记忆」这类宽口径工具
     // 对任何查询都高度相似，把真正的精准工具挤下去。
-    if (t.cap > 0 && s > t.cap) s = t.cap;
+    const clamp = (v) => {
+      let x = v;
+      if (t.floor > 0 && x < t.floor) x = t.floor;
+      if (t.cap > 0 && x > t.cap) x = t.cap;
+      return x;
+    };
+    const s = clamp(base + boost);
     if (s < minScore) continue;
-    scored.push({ ...summary(t), score: +s.toFixed(4), detail: { name: +sn.toFixed(4), traits: +st.toFixed(4), scenes: +ss.toFixed(4) } });
+    scored.push({ t, ref, base, boost, sbest, sn, st, ss, lex, sceneCos, s, clamp });
   }
-  scored.sort((a, b) => b.score - a.score);
+  scored.sort((a, b) => b.s - a.s);
+
+  // 3) 候选池：xhigh 先放大池子，再用「场景 top3 均值」做一轮精排。
+  // 逐条场景比合并成一段更抗稀释，top3 均值能把「三条都相关」和「一条偶然很像」区分开。
+  const poolSize = profile.poolFactor > 1
+    ? Math.max(Math.max(topK, 1) * profile.poolFactor, profile.poolMin)
+    : scored.length;
+  const pool = scored.slice(0, Math.min(poolSize, scored.length));
+  if (profile.poolFactor > 1) {
+    for (const it of pool) {
+      if (!it.sceneCos || !it.sceneCos.length) continue;
+      const top3 = it.sceneCos.slice(0, 3);
+      const mean3 = top3.reduce((n, x) => n + x.cos, 0) / top3.length;
+      const refined = it.sbest * 0.6 + mean3 * 0.4;
+      it.sceneTop3 = mean3;
+      it.s = it.clamp(it.base - it.sbest * W_S + refined * W_S + it.boost);
+    }
+    pool.sort((a, b) => b.s - a.s);
+  }
+
+  const top = pool.slice(0, Math.min(Math.max(topK, 1), 30)).map((it) => {
+    const out = summaryFor(
+      it.t, profile, c,
+      profile.breakdown && it.sceneCos ? it.sceneCos.slice(0, 3).map((x) => x.text) : null,
+    );
+    out.score = +it.s.toFixed(4);
+    out.detail = { name: +it.sn.toFixed(4), traits: +it.st.toFixed(4), scenes: +it.ss.toFixed(4) };
+    if (profile.breakdown) {
+      out.detail.lexMatch = +it.lex.toFixed(4);
+      if (it.sceneTop3 != null) out.detail.sceneTop3 = +it.sceneTop3.toFixed(4);
+    }
+    return out;
+  });
+
   return {
-    model: MODEL,
+    mode: 'vector',
+    model: modelId(),
+    reasoningEffort: conf.reasoningEffort,
     matchedPaths: pathTop.map((p) => {
       const cat = c.categories.find((x) => x.id === p.cat);
-      const sb = cat?.subs?.find((s) => s.id === p.sub);
-      return { path: `${p.cat}/${p.sub}`, label: [cat?.name, sb?.name].filter(Boolean).join(' > '), score: p.score };
+      const sb = cat && (cat.subs || []).find((s) => s.id === p.sub);
+      return { path: p.cat + '/' + p.sub, label: [cat && cat.name, sb && sb.name].filter(Boolean).join(' > '), score: p.score };
     }),
-    top: scored.slice(0, Math.min(Math.max(topK, 1), 30)),
+    top,
+    ...(dis.size ? { disabledExcluded: dis.size } : {}),
     hint: '以上为向量召回候选，是否使用由主模型审核决定；score 为余弦相似度+路径加成，仅供参考不构成结论。',
     auditProtocol: AUDIT_PROTOCOL,
     // 发现层挂到检索上：每次检索顺手报一下待归纳规模，主模型不必专门去扫描。
@@ -538,8 +682,45 @@ const TOOLS = [
       required: ['ref'],
     },
   },
+  {
+    name: 'atlas_config',
+    description: '读写工具库配置（config.json，改完即时生效，不需要重启）：action=get 看当前配置（apiKey 脱敏）；set 改向量供应商 baseUrl / 模型 model / apiKey / 思考强度 reasoningEffort(low|medium|high|xhigh) / useLlmFallback / hideDisabledInBrowse / disabled；disable 与 enable 按 refs 批量开关禁用项；reset 恢复默认（保留 apiKey）。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        action: { type: 'string', description: 'get（默认）/ set / reset / disable / enable' },
+        baseUrl: { type: 'string', description: 'set：OpenAI 兼容的向量服务地址，如 https://api.siliconflow.cn/v1' },
+        model: { type: 'string', description: 'set：embedding 模型 id' },
+        apiKey: { type: 'string', description: 'set：API Key（写进本机 config.json，不入库）' },
+        reasoningEffort: { type: 'string', description: 'set：low / medium / high / xhigh，默认 high' },
+        useLlmFallback: { type: 'boolean', description: 'set：true = 不调向量模型，检索改为把候选原文直接交给大模型判断' },
+        hideDisabledInBrowse: { type: 'boolean', description: 'set：true = 浏览时连禁用项也隐藏' },
+        disabled: {
+          type: 'object',
+          properties: {
+            skills: { type: 'array', items: { type: 'string' } },
+            tools: { type: 'array', items: { type: 'string' } },
+          },
+          description: 'set：整体替换禁用清单（按 ref 或 name 匹配）',
+        },
+        refs: { type: 'array', items: { type: 'string' }, description: 'disable / enable：要开关的 ref 列表' },
+      },
+    },
+  },
+  {
+    name: 'atlas_models',
+    description: '拉取当前向量供应商的 GET /models 列表，自动标出哪些是 embedding 模型（按元数据 type/sub_type/pipeline_tag/capabilities 与 id 正则识别，排除 rerank）。可选 applyModel 把某个 id 一键写进配置。',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        baseUrl: { type: 'string', description: '（可选）临时指定供应商地址，不写则用配置里的' },
+        apiKey: { type: 'string', description: '（可选）临时指定 Key，不写则用配置/环境变量' },
+        applyModel: { type: 'string', description: '（可选）把这个模型 id 写进配置并立即生效' },
+        all: { type: 'boolean', description: 'false 时只回 embedding 模型，默认回全部' },
+      },
+    },
+  },
 ];
-
 // ---------------- 工具实现 ----------------
 async function callTool(name, args) {
   args = args || {};
@@ -553,34 +734,57 @@ async function callTool(name, args) {
   }
 
   if (name === 'atlas_browse') {
+    const conf = cfg();
+    const dis = disabledRefs(c);
+    const hide = conf.hideDisabledInBrowse || args.includeDisabled === false;
+    const keep = (ref) => !hide || !dis.has(ref);
     if (!args.category) {
-      const out = c.categories.map((cat) => ({
-        id: cat.id, name: cat.name, desc: cat.desc,
-        subs: (cat.subs || []).length,
-        tools: new Set((cat.subs || []).flatMap((s) => s.tools || [])).size,
-      }));
-      return { content: [{ type: 'text', text: JSON.stringify({ layer: 1, categories: out, totalTools: Object.keys(c.tools).length }, null, 2) }] };
+      const out = c.categories.map((cat) => {
+        const refs = [...new Set((cat.subs || []).flatMap((s) => s.tools || []))].filter(keep);
+        return {
+          id: cat.id, name: cat.name, desc: cat.desc,
+          subs: (cat.subs || []).length,
+          tools: refs.length,
+          ...(dis.size ? { disabled: refs.filter((r) => dis.has(r)).length } : {}),
+        };
+      });
+      return { content: [{ type: 'text', text: JSON.stringify({ layer: 1, categories: out, totalTools: Object.keys(c.tools).length, disabled: dis.size }, null, 2) }] };
     }
     const cat = findCat(args.category);
     if (!cat) fail(`没有这个总分类: ${args.category}`);
     if (!args.sub) {
-      const out = (cat.subs || []).map((s) => ({ id: s.id, name: s.name, desc: s.desc, tools: (s.tools || []).map((ref) => ({ ref, name: c.tools[ref]?.name || ref })) }));
+      const out = (cat.subs || []).map((s) => ({
+        id: s.id, name: s.name, desc: s.desc,
+        tools: (s.tools || []).filter(keep).map((ref) => ({
+          ref, name: c.tools[ref]?.name || ref,
+          ...(dis.has(ref) ? { disabled: true } : {}),
+        })),
+      }));
       return { content: [{ type: 'text', text: JSON.stringify({ layer: 2, category: { id: cat.id, name: cat.name, desc: cat.desc }, subs: out }, null, 2) }] };
     }
     const sb = (cat.subs || []).find((s) => s.id === args.sub);
     if (!sb) fail(`该总分类下没有子分类: ${args.sub}`);
-    const out = (sb.tools || []).map((ref) => summary(c.tools[ref] || { ref, name: ref }));
+    const out = (sb.tools || []).filter(keep).map((ref) => {
+      const s = summary(c.tools[ref] || { ref, name: ref });
+      if (dis.has(ref)) s.disabled = true;
+      return s;
+    });
     return { content: [{ type: 'text', text: JSON.stringify({ layer: 3, path: `${cat.id}/${sb.id}`, label: `${cat.name} > ${sb.name}`, tools: out }, null, 2) }] };
   }
 
   if (name === 'atlas_detail') {
     const t = c.tools[args.ref];
     if (!t) fail(`没有这个工具条目: ${args.ref}`);
-    return { content: [{ type: 'text', text: JSON.stringify({ ...t, pathLabels: (t.categories || []).map(([a, b]) => {
-      const cat = c.categories.find((x) => x.id === a);
-      const sb = cat?.subs?.find((s) => s.id === b);
-      return [cat?.name, sb?.name].filter(Boolean).join(' > ');
-    }) }, null, 2) }] };
+    const dis = disabledRefs(c);
+    return { content: [{ type: 'text', text: JSON.stringify({
+      ...t,
+      ...(dis.has(args.ref) ? { disabled: true } : {}),
+      pathLabels: (t.categories || []).map(([a, b]) => {
+        const cat = c.categories.find((x) => x.id === a);
+        const sb = cat?.subs?.find((s) => s.id === b);
+        return [cat?.name, sb?.name].filter(Boolean).join(' > ');
+      }),
+    }, null, 2) }] };
   }
 
   if (name === 'atlas_upsert') {
@@ -588,7 +792,12 @@ async function callTool(name, args) {
     await saveCatalog();
     loadCatalog();
     const vn = await warmTool(entry.ref, entry);
-    return { content: [{ type: 'text', text: JSON.stringify({ ok: true, ref: entry.ref, paths: entry.categories, dim: vn ? vn.length : 0, label: entry.name }, null, 2) }] };
+    const skipped = cfg().useLlmFallback;
+    return { content: [{ type: 'text', text: JSON.stringify({
+      ok: true, ref: entry.ref, paths: entry.categories,
+      dim: vn ? vn.length : 0, label: entry.name,
+      ...(skipped ? { embeddingSkipped: true, note: 'useLlmFallback=true：不调用向量模型，该条目只有原文，检索走大模型直读。' } : {}),
+    }, null, 2) }] };
   }
 
   if (name === 'atlas_link') {
@@ -600,18 +809,27 @@ async function callTool(name, args) {
     if (!t.categories.some(([a, b]) => a === args.category && b === args.sub)) t.categories.push([args.category, args.sub]);
     if (!sb.tools.includes(args.ref)) sb.tools.push(args.ref);
     await saveCatalog(); loadCatalog();
-    await warmTool(args.ref, t);
-    return { content: [{ type: 'text', text: JSON.stringify({ ok: true, ref: args.ref, categories: t.categories }, null, 2) }] };
+    const vn = await warmTool(args.ref, t);
+    const skipped = cfg().useLlmFallback;
+    return { content: [{ type: 'text', text: JSON.stringify({
+      ok: true, ref: args.ref, categories: t.categories,
+      ...(skipped ? { embeddingSkipped: true } : { dim: vn ? vn.length : 0 }),
+    }, null, 2) }] };
   }
 
   if (name === 'atlas_stats') {
+    const conf = cfg();
     const cats = c.categories.map((cat) => ({
       id: cat.id, name: cat.name,
       subs: (cat.subs || []).length,
       tools: new Set((cat.subs || []).flatMap((s) => s.tools || [])).size,
     }));
+    const dis = disabledRefs(c);
     return { content: [{ type: 'text', text: JSON.stringify({
-      dir: ATLAS_DIR, model: MODEL,
+      dir: ATLAS_DIR, configPath: CONFIG_PATH,
+      model: conf.embedding.model, baseUrl: conf.embedding.baseUrl,
+      reasoningEffort: conf.reasoningEffort, useLlmFallback: conf.useLlmFallback,
+      disabled: dis.size,
       categories: c.categories.length,
       subs: c.categories.reduce((n, cat) => n + (cat.subs || []).length, 0),
       tools: Object.keys(c.tools).length,
@@ -621,6 +839,12 @@ async function callTool(name, args) {
   }
 
   if (name === 'atlas_reindex') {
+    if (cfg().useLlmFallback) {
+      return { content: [{ type: 'text', text: JSON.stringify({
+        ok: false, embeddingSkipped: true,
+        note: 'useLlmFallback=true：检索走大模型直读，不需要向量。要重建向量先把 useLlmFallback 关掉。',
+      }, null, 2) }] };
+    }
     if (args.force) { vecDisk = {}; vecDirty = true; await saveVecDisk(); }
     const refs = Object.keys(c.tools);
     let done = 0;
@@ -629,7 +853,7 @@ async function callTool(name, args) {
     for (const cat of c.categories) for (const sb of cat.subs || []) paths.push(pathText(cat, sb));
     for (const p of paths) await vecForFill(p);
     await saveVecDisk();
-    return { content: [{ type: 'text', text: JSON.stringify({ ok: true, tools: done, paths: paths.length, vectors: Object.keys(loadVecDisk()).length }, null, 2) }] };
+    return { content: [{ type: 'text', text: JSON.stringify({ ok: true, model: modelId(), tools: done, paths: paths.length, vectors: Object.keys(loadVecDisk()).length }, null, 2) }] };
   }
 
   // ---------------- 发现层：扫 → 提案 → 审核提交 ----------------
@@ -678,9 +902,11 @@ async function callTool(name, args) {
     await saveCatalog();
     loadCatalog();
     const dims = {};
+    const skipWarm = cfg().useLlmFallback;
     for (const ref of refs) {
       const t = c.tools[ref];
       if (!t) continue;
+      if (skipWarm) { dims[ref] = 0; continue; }
       const vn = await warmTool(ref, t);
       dims[ref] = vn ? vn.length : 0;
     }
@@ -717,6 +943,92 @@ async function callTool(name, args) {
     st.items[args.ref] = it;
     await saveState(st);
     return { content: [{ type: 'text', text: JSON.stringify({ ok: true, ref: args.ref, status: it.status }, null, 2) }] };
+  }
+
+  // ---------------- 配置面：向量供应商 / 思考强度 / 禁用清单 / 回退开关 ----------------
+  // 全部走 config.json（mtime 热加载），改完立刻生效，不需要重启 DSH。
+  if (name === 'atlas_config') {
+    const action = String(args.action || 'get');
+    if (action === 'reset') {
+      const cur = cfg();
+      const next = await writeConfig({
+        embedding: { baseUrl: DEFAULT_CONFIG.embedding.baseUrl, model: DEFAULT_CONFIG.embedding.model, apiKey: cur.embedding.apiKey },
+        reasoningEffort: DEFAULT_CONFIG.reasoningEffort,
+        useLlmFallback: DEFAULT_CONFIG.useLlmFallback,
+        disabled: { skills: [], tools: [] },
+        hideDisabledInBrowse: DEFAULT_CONFIG.hideDisabledInBrowse,
+      });
+      return { content: [{ type: 'text', text: JSON.stringify({ ok: true, action, config: configView(next) }, null, 2) }] };
+    }
+    if (action === 'set') {
+      const patch = {};
+      const emb = {};
+      if (typeof args.baseUrl === 'string') emb.baseUrl = args.baseUrl;
+      if (typeof args.model === 'string') emb.model = args.model;
+      if (typeof args.apiKey === 'string') emb.apiKey = args.apiKey;
+      if (Object.keys(emb).length) patch.embedding = emb;
+      if (typeof args.reasoningEffort === 'string') {
+        const e = args.reasoningEffort.toLowerCase();
+        if (!EFFORTS.includes(e)) fail('reasoningEffort 只能是 ' + EFFORTS.join(' / '));
+        patch.reasoningEffort = e;
+      }
+      if (typeof args.useLlmFallback === 'boolean') patch.useLlmFallback = args.useLlmFallback;
+      if (typeof args.hideDisabledInBrowse === 'boolean') patch.hideDisabledInBrowse = args.hideDisabledInBrowse;
+      if (args.disabled && typeof args.disabled === 'object') {
+        patch.disabled = {
+          skills: Array.isArray(args.disabled.skills) ? args.disabled.skills : undefined,
+          tools: Array.isArray(args.disabled.tools) ? args.disabled.tools : undefined,
+        };
+      }
+      if (!Object.keys(patch).length) fail('set 至少要给一个字段（baseUrl / model / apiKey / reasoningEffort / useLlmFallback / disabled / hideDisabledInBrowse）');
+      const next = await writeConfig(patch);
+      return { content: [{ type: 'text', text: JSON.stringify({ ok: true, action, config: configView(next) }, null, 2) }] };
+    }
+    if (action === 'disable' || action === 'enable') {
+      const cur = cfg();
+      const list = Array.isArray(args.refs) ? args.refs.map(String) : [];
+      if (!list.length) fail('disable / enable 需要 refs 数组');
+      const pick = (arr) => (action === 'disable'
+        ? [...new Set([...arr, ...list])]
+        : arr.filter((x) => !list.includes(x)));
+      const next = await writeConfig({ disabled: { skills: pick(cur.disabled.skills), tools: pick(cur.disabled.tools) } });
+      return { content: [{ type: 'text', text: JSON.stringify({ ok: true, action, disabled: next.disabled }, null, 2) }] };
+    }
+    return { content: [{ type: 'text', text: JSON.stringify({ ok: true, action: 'get', config: configView(cfg()) }, null, 2) }] };
+  }
+
+  if (name === 'atlas_models') {
+    const conf = cfg();
+    const base = String(args.baseUrl || conf.embedding.baseUrl).replace(/\/+$/, '');
+    const key = typeof args.apiKey === 'string' && args.apiKey ? args.apiKey : resolveKey();
+    if (!key) fail('还没有可用的 API Key：先用 atlas_config set 写 apiKey，或设置环境变量 SILICONFLOW_API_KEY。');
+    let payload = null;
+    let status = 0;
+    try {
+      const res = await fetch(base + '/models', { headers: { Authorization: 'Bearer ' + key } });
+      status = res.status;
+      if (res.ok) payload = await res.json();
+      else payload = { error: (await res.text().catch(() => '')).slice(0, 300) };
+    } catch (e) {
+      fail('拉取 /models 失败：' + (e && e.message ? e.message : String(e)));
+    }
+    const all = normalizeModels(payload);
+    const emb = embeddingModelsFromList(all);
+    let applied = null;
+    if (args.applyModel) {
+      const pick = String(args.applyModel);
+      if (!all.some((m) => m.id === pick)) fail('该供应商的模型列表里没有 ' + pick + '，先不加 applyModel 看一眼全部 id。');
+      await writeConfig({ embedding: { model: pick, baseUrl: base } });
+      applied = pick;
+    }
+    return { content: [{ type: 'text', text: JSON.stringify({
+      ok: status >= 200 && status < 300,
+      status, baseUrl: base, current: conf.embedding.model,
+      total: all.length,
+      embeddingModels: emb,
+      ...(applied ? { applied } : {}),
+      ...(args.all === false ? {} : { models: all }),
+    }, null, 2) }] };
   }
 
   fail(`未知工具: ${name}`);

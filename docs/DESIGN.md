@@ -352,3 +352,69 @@ DSH 的插件能做的事比 MCP server 多（能注册 systemPrompt 段、能�
 | 无增量索引 | 改一条工具要 `reindex` 就得全量重算（有 vectors.json 缓存所以只是本地重算，不重复付费） |
 | cap / floor 是全局参数 | 不随查询变化。跨域查询时靠 `auditProtocol` 的 fallback 兜住 |
 | 中文为主 | `scenes` 全是中文表述，英文查询命中率未验证 |
+
+---
+
+## 九、配置层：把「换供应商 / 改强度 / 禁工具 / 不调向量」从代码里挪出来
+
+### 9.1 为什么要有 config.json，而不是全靠环境变量
+
+环境变量在 DSH 里有两个硬伤：宿主从 GUI 启动时进程 env 是启动那一刻的快照，之后写进用户作用域的变量取不到；改完还得重启。配置文件的解法是 **按 `mtime` 热加载** —— `loadConfig()` 每次调用先 `statSync` 一次，mtime 没变直接返回缓存对象，变了就重新解析。代价是一次 `stat`（微秒级），换来「改完下一个请求就生效」。
+
+优先级写成三级：`config.json` 非空值 > 环境变量（Windows 再兜一层 `HKCU\Environment` 注册表）> 内置默认值。环境变量保留是为了 CI / 容器能一次性注入，不为了日常改配置。
+
+`apiKey` 只落在 `config.json`，而 `config.json` 进 `.gitignore`，仓库里只有 `config.example.json`。所有对外回吐（`atlas_config get`、`config-cli show`、`atlas_stats`）一律走 `configView()`，`apiKey` 经 `maskKey()` 脱敏，并额外报 `apiKeySource`（`config.json` / `env` / `none`）—— 排查「为什么还是旧 Key」时这一条比 Key 本身有用。
+
+### 9.2 为什么 embedding 模型识别不能只靠正则
+
+三家供应商的 `GET /models` 返回结构完全不同：OpenAI 只有 `{id}`；SiliconFlow 有 `type` / `sub_type`；Ollama 有 `details.family`；vLLM 常常只有 `id`。只写正则会在「id 里没有 embed 字样」时漏判，只看元数据会在「元数据缺失」时漏判。
+
+所以 `isEmbeddingModel()` 是两段式：先看元数据里是否出现 `embed`（覆盖 `type` / `sub_type` / `pipeline_tag` / `task` / `capabilities` / `details.family`），再看 id 正则（`embed` / `bge-` / `e5-` / `gte-` / `nomic-embed` / `mxbai-embed` / `snowflake-arctic-embed` / `text-embedding` / `qwen3-embedding`），并且**先排除 `rerank`** —— rerank 模型的 id 里也常带 `bge`，不排掉就会被当成 embedding 选走，然后在 `/embeddings` 上 400。
+
+### 9.3 禁用清单为什么不是「从目录里删掉」
+
+目录是**事实**，推荐是**策略**。禁用一条技能的语义是「这次会话别推荐给我用」，不是「这条技能不存在」。所以：
+
+- `atlas_search` 剔除（推荐层面生效），并在返回体里报 `disabledExcluded` 让主模型知道「候选少了，不是我漏了」；
+- `atlas_browse` / `atlas_detail` 默认保留并标 `disabled: true`，只有 `hideDisabledInBrowse: true` 才彻底隐藏。
+
+如果禁用等于删除，主模型就永远看不到「这条被禁了」，也就无法在换场景后主动提出「要不要启用它」。保留可见性 + 标注，比删掉信息量更大。
+
+匹配同时认 `ref`（`skill/apk-unpack`）与 `name`（`apk-unpack`）：调用方通常只记得名字，配置里手写 ref 容易打错层级。
+
+### 9.4 四档思考强度改的是什么
+
+四档差异全部集中在 `EFFORT_PROFILES` 一张表里，而不是散在代码各处 if 里。改的是四个旋钮：
+
+| 旋钮 | 含义 |
+|---|---|
+| `pathTop` | 路径层保留几条，决定 `matchedPaths` 的精细度 |
+| `sceneMax` | 是否启用逐条场景软最大值 |
+| `lexWeight` | 词元重合度的混合权重 |
+| `sceneDetail` / `poolFactor` / `breakdown` | 回吐体积、候选池放大倍数、是否给 `scoreBreakdown` |
+
+`low` → `high` 只调精度与体积，**不换打分口径**（权重仍是 0.55 / 0.24 / 0.21），这样同一份 `catalog.json` 在不同档位下的相对排序是稳定的，调参结论不会因为换档失效。
+
+`xhigh` 是唯一会**改变排序**的档：候选池先放大到 `max(topK*3, 24)`，再用「场景 top3 均值」重排。理由是软最大值仍可能被单条强命中主导，而 top3 均值能区分「三条都相关」和「一条偶然很像」。重排只作用在放大后的池子里，代价是每次检索多算 `3 * poolSize` 次余弦（纯本地计算，不额外调 API）。
+
+词元重合度（`lexScore`）解决的是向量模型的固有盲区：专有名词、命令名、文件名这类字面信号，语义向量往往给不出高分。中文按二元组切（无分词依赖），英文按 `[a-z0-9_./+-]{2,}` 切。权重给得很小（`high` 0.06 / `xhigh` 0.10），因为它只是补丁 —— 给大了会让「查询里恰好出现的词」压过真正的语义匹配。
+
+### 9.5 `useLlmFallback`：为什么必须是硬短路
+
+这个开关的语义是「不用向量模型」，所以实现上必须是**物理上不发请求**，而不是「发了但忽略结果」。`searchTools()` 第一行就 `if (conf.useLlmFallback) return fallbackSearch(...)`，而 `fallbackSearch()` 里不出现任何 `embed` / `embedBatch` / `vecForFill`。自测里专门有一条断言盯这件事：记下调用前的 `/embeddings` 计数，跑完一次 `atlas_search` 后计数必须不变。
+
+排序退化为纯字面重合度（`lexScore`），但回吐的**信息量按档位放大**：没有向量分数可依，主模型只能读原文，所以 `high` 给前 40 条 + 分类概览，`xhigh` 给全量含完整 `invoke` / `avoid` / 路径名。`low` 反而给得最少（前 12 条精简）—— 这一档的定位是「省 token」。
+
+写入侧同开关同语义：`atlas_upsert` / `atlas_link` / `atlas_commit` 跳过 `warmTool`（返回 `embeddingSkipped: true`），`atlas_reindex` 直接短路。否则「关掉向量」之后一次录入又会偷偷调一次 API。
+
+### 9.6 自测怎么覆盖这套东西
+
+`scripts/test-config.mjs` 起一个本地 mock 向量服务（`GET /models` + `POST /embeddings`），把 `server.mjs` 当真的 MCP 子进程拉起来，用临时 `ATLAS_DIR` 跑 42 项断言。关键点：
+
+1. mock 的 `/models` 里放五种模型（有元数据的 embedding、只有 id 的 embedding、rerank、普通对话模型），验证识别规则的两段式与 rerank 排除；
+2. 断言 `atlas_config get` 的回吐里**不含**测试用 Key 明文；
+3. 逐档改 `reasoningEffort` 后立刻再检索，验证 mtime 热加载真的生效（不是重启才生效）；
+4. 禁用 / 启用 / `hideDisabledInBrowse` 三种组合分别验 `atlas_search` 与 `atlas_browse`；
+5. `useLlmFallback` 用计数器证明零请求。
+
+这套测试不依赖真实 API Key，也不消耗额度，所以能进常规自检清单。

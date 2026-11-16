@@ -16,6 +16,9 @@ discover-state.json
 _*.txt
 baseline.txt
 
+# 本机配置：含 apiKey / 本机路径，绝不入库；仓库里只留 config.example.json
+config.json
+
 # 临时文件
 *.tmp
 *.tmp.*

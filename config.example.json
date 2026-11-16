@@ -1,0 +1,14 @@
+{
+  "embedding": {
+    "baseUrl": "https://api.siliconflow.cn/v1",
+    "apiKey": "",
+    "model": "Qwen/Qwen3-Embedding-4B"
+  },
+  "reasoningEffort": "high",
+  "useLlmFallback": false,
+  "disabled": {
+    "skills": [],
+    "tools": []
+  },
+  "hideDisabledInBrowse": false
+}
