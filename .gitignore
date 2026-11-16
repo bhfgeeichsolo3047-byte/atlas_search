@@ -1,0 +1,27 @@
+# 依赖（本项目零依赖，此为兜底）
+node_modules/
+
+# 派生的向量缓存：1030 条 × 2560 维 ≈ 19 MB，可由 scripts/reindex.mjs 完全重建
+# 不入库的原因：每次重算全量变化，diff 无意义；且换 embedding 模型后整体失效
+vectors.json
+
+# 本机扫描状态：含所在机器的技能源绝对路径，属机器本地状态，不入库
+# 首次运行 atlas_discover / discover-cli.mjs scan 会自动重建
+discover-state.json
+
+# 临时脚本（下划线开头的临时产物；scripts/_paths.mjs 是正式依赖，单独放行）
+/_*.mjs
+/scripts/_*.mjs
+!/scripts/_paths.mjs
+_*.txt
+baseline.txt
+
+# 临时文件
+*.tmp
+*.tmp.*
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

@@ -1,0 +1,4062 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-16T17:04:35.507Z",
+  "categories": [
+    {
+      "id": "code",
+      "name": "编程开发",
+      "desc": "写代码、改代码、调试、重构、测试、依赖管理、Git 操作",
+      "subs": [
+        {
+          "id": "edit",
+          "name": "代码编辑",
+          "desc": "读写改写源码文件、批量替换、格式化、跨文件定位",
+          "tools": [
+            "tool/glob",
+            "tool/read",
+            "tool/edit",
+            "tool/write",
+            "tool/grep",
+            "skill/ake__dev-god",
+            "skill/lemonade-router-builder",
+            "skill/local-ai-app-integration",
+            "skill/wbexpert__code-review-expert__frontend-dev",
+            "skill/wbexpert__code-review-expert__fullstack-dev",
+            "skill/wbexpert__code-review-expert__impeccable",
+            "skill/douyinpay-payment-integration",
+            "skill/frontend-design",
+            "skill/web-artifacts-builder",
+            "skill/hana-app-creator",
+            "skill/skill-creator",
+            "skill/uapi"
+          ]
+        },
+        {
+          "id": "build",
+          "name": "构建运行",
+          "desc": "编译、打包、跑测试、起服务、依赖安装",
+          "tools": [
+            "tool/terminal_open",
+            "tool/shell",
+            "skill/hyperloom-workload-optimizer",
+            "skill/quark-install",
+            "skill/quark-torch-llm-ptq",
+            "skill/serving-llms-on-epyc",
+            "skill/serving-llms-on-instinct",
+            "skill/wbexpert__code-review-expert__fullstack-dev",
+            "skill/iga-pages",
+            "skill/redis-development",
+            "skill/magpie-kernel-evaluator"
+          ]
+        },
+        {
+          "id": "debug",
+          "name": "调试排错",
+          "desc": "复现问题、读堆栈、加日志、定位根因、验证修复",
+          "tools": [
+            "skill/security-code-auditor",
+            "skill/re-verify",
+            "skill/ake__dev-god",
+            "skill/rocm-doctor",
+            "skill/security-best-practices",
+            "skill/webapp-testing"
+          ]
+        },
+        {
+          "id": "git",
+          "name": "git",
+          "desc": "",
+          "tools": [
+            "skill/wbexpert__agent-orchestrator__github",
+            "skill/gh-cli",
+            "skill/git-commit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "name": "数据处理",
+      "desc": "文件检索、文本处理、结构化数据、数据库、日志分析、统计",
+      "subs": [
+        {
+          "id": "file",
+          "name": "文件检索",
+          "desc": "按名找文件、按内容搜、语义搜片段",
+          "tools": [
+            "tool/glob",
+            "tool/workflow",
+            "mcp/embed-router",
+            "tool/read_image",
+            "tool/read",
+            "tool/grep",
+            "skill/leanrea"
+          ]
+        },
+        {
+          "id": "text",
+          "name": "文本处理",
+          "desc": "替换、抽取、格式转换、正则",
+          "tools": [
+            "tool/render_ui",
+            "tool/session_search",
+            "tool/grep",
+            "skill/tracelens-analysis-orchestrator",
+            "skill/wbexpert__senior-project-manager__minimax-docx",
+            "skill/wbexpert__seo-expert__fbs-bookwriter",
+            "skill/chart-visualization",
+            "skill/consulting-analysis",
+            "skill/data-analysis",
+            "skill/hook-analyzer-skill",
+            "skill/report-generator-skill",
+            "skill/office-suite-notes",
+            "skill/quiet-musing",
+            "skill/recipe-creator"
+          ]
+        },
+        {
+          "id": "db",
+          "name": "db",
+          "desc": "",
+          "tools": [
+            "skill/data-analysis",
+            "skill/redis-development"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "auto",
+      "name": "系统自动化",
+      "desc": "桌面操作、窗口控制、剪贴板、进程管理、注册表、WSL、远程机器",
+      "subs": [
+        {
+          "id": "system",
+          "name": "系统管理",
+          "desc": "进程、注册表、环境变量、服务",
+          "tools": [
+            "tool/terminal_open",
+            "mcp/windows",
+            "tool/wsl",
+            "tool/shell",
+            "skill/mnemon-provider-connect",
+            "skill/hyperloom-workload-optimizer",
+            "skill/lemonade-router-builder",
+            "skill/local-ai-use",
+            "skill/tracelens-analysis-orchestrator",
+            "skill/quark-install",
+            "skill/quark-torch-llm-ptq",
+            "skill/rocm-doctor",
+            "skill/serving-llms-on-epyc",
+            "skill/serving-llms-on-instinct",
+            "skill/git-commit",
+            "skill/scale-os-hana",
+            "skill/magpie-kernel-evaluator"
+          ]
+        },
+        {
+          "id": "remote",
+          "name": "远程执行",
+          "desc": "远程主机、SSH、WSL、跨机文件",
+          "tools": [
+            "tool/wsl",
+            "tool/rw_connect",
+            "tool/remote_send_message",
+            "tool/shell"
+          ]
+        },
+        {
+          "id": "desktop",
+          "name": "桌面控制",
+          "desc": "点击、输入、窗口、截图",
+          "tools": [
+            "tool/desktop_control",
+            "tool/screen_view",
+            "mcp/windows",
+            "skill/wbexpert__dev-ops-automation-engineer__agent-browser-core",
+            "skill/wbexpert__senior-developer__browser-use"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "agent",
+      "name": "智能体编排",
+      "desc": "派发子代理、专家召唤、团队协作、任务板、工作流、技能加载、工具发现",
+      "subs": [
+        {
+          "id": "team",
+          "name": "团队协作",
+          "desc": "建队、任务板、认领、审批、评审",
+          "tools": [
+            "tool/todo_write",
+            "tool/agent_teams_create",
+            "tool/agent_teams_status",
+            "tool/team_task_create",
+            "skill/re-evidence",
+            "skill/task-mode-router",
+            "skill/expert-orchestration"
+          ]
+        },
+        {
+          "id": "dispatch",
+          "name": "代理派发",
+          "desc": "子代理、专家召唤、批量小队",
+          "tools": [
+            "tool/remote_send_message",
+            "tool/summon_expert",
+            "tool/summon_experts",
+            "tool/list_experts",
+            "tool/subagent",
+            "tool/subagent_fork",
+            "tool/workflow",
+            "skill/expert-orchestration"
+          ]
+        },
+        {
+          "id": "skill",
+          "name": "技能加载",
+          "desc": "技能检索、技能正文加载",
+          "tools": [
+            "tool/skill",
+            "mcp/embed-router",
+            "skill/re-dispatch",
+            "mcp/tool-atlas",
+            "skill/craft-anything",
+            "skill/task-mode-router",
+            "skill/indiv-guipi__find-skills",
+            "skill/wbexpert__agent-orchestrator__github",
+            "skill/wbexpert__code-review-expert__capability-evolver",
+            "skill/wbexpert__seo-expert__anti-distill",
+            "skill/character-creator",
+            "skill/scale-os-hana",
+            "skill/skill-creator",
+            "skill/user-guide"
+          ]
+        },
+        {
+          "id": "tool",
+          "name": "工具发现",
+          "desc": "按语义查工具库、浏览三层目录、收录与归纳新工具",
+          "tools": [
+            "mcp/tool-atlas",
+            "skill/indiv-guipi__find-skills"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "re",
+      "name": "逆向工程",
+      "desc": "反编译、脱壳、动态调试、二进制补丁、协议还原、混淆分析",
+      "subs": [
+        {
+          "id": "static",
+          "name": "静态分析",
+          "desc": "反汇编、反编译、伪代码、控制流、符号恢复",
+          "tools": [
+            "mcp/craft-anything",
+            "skill/deepseek-re",
+            "skill/ida-reverse",
+            "skill/ghidra-analysis",
+            "skill/a-protector-elf-repair",
+            "skill/apktool-tool",
+            "skill/asm-analysis",
+            "skill/craft-anything",
+            "skill/leanrea",
+            "skill/linker-fake-load-unwrapper",
+            "skill/re-js-wasm",
+            "skill/udp-analysis",
+            "skill/xigong-auto-reverse",
+            "skill/xigong-funk-hikari",
+            "skill/apk-patch",
+            "skill/apk-reverse",
+            "skill/reverse-engineer-anything",
+            "skill/reverse-skill"
+          ]
+        },
+        {
+          "id": "unpack",
+          "name": "脱壳还原",
+          "desc": "加壳识别、dump、IAT 修复、OEP 定位",
+          "tools": [
+            "mcp/craft-anything",
+            "skill/elf-local-auth-patcher",
+            "skill/7k-anp-rebuild",
+            "skill/a-protector-elf-repair",
+            "skill/ash12-elf-complete-flow",
+            "skill/feidun-libhook1-archive",
+            "skill/linker-fake-load-unwrapper",
+            "skill/tprotector-tutorial",
+            "skill/xigong-auto-reverse",
+            "skill/yingan-tuoxiu",
+            "skill/apk-reverse",
+            "skill/apk-unpack"
+          ]
+        },
+        {
+          "id": "dynamic",
+          "name": "动态调试",
+          "desc": "断点、hook、内存读写、寄存器、运行时跟踪",
+          "tools": [
+            "skill/deepseek-re",
+            "skill/asm-analysis",
+            "skill/xigong-funk-hikari",
+            "skill/apk-dynamic",
+            "skill/apk-unpack",
+            "skill/reverse-engineer-anything"
+          ]
+        },
+        {
+          "id": "patch",
+          "name": "补丁改造",
+          "desc": "字节补丁、跳转改写、重签名、功能复验",
+          "tools": [
+            "skill/elf-local-auth-patcher",
+            "skill/apktool-tool",
+            "skill/ash12-elf-complete-flow",
+            "skill/yingan-tuoxiu",
+            "skill/apk-patch"
+          ]
+        },
+        {
+          "id": "route",
+          "name": "逆向路由",
+          "desc": "拿到样本先做指纹判定、保护识别，决定走哪条技能链与验收标准",
+          "tools": [
+            "skill/re-dispatch",
+            "skill/re-failure-cases",
+            "skill/xigong-auto-reverse",
+            "skill/apk-reverse",
+            "skill/reverse-skill"
+          ]
+        },
+        {
+          "id": "evidence",
+          "name": "证据链",
+          "desc": "证据目录结构、结论挂依据、交付物格式、一键复现与回滚",
+          "tools": [
+            "skill/re-evidence",
+            "skill/7k-anp-rebuild",
+            "skill/a-protector-elf-repair",
+            "skill/feidun-libhook1-archive",
+            "skill/re-failure-cases",
+            "skill/re-verify",
+            "skill/tprotector-tutorial"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec",
+      "name": "安全测试",
+      "desc": "渗透测试、漏洞扫描、凭证攻击、提权、无线、Web 安全、社工",
+      "subs": [
+        {
+          "id": "web",
+          "name": "Web 安全",
+          "desc": "注入、XSS、SSRF、上传、越权、WAF 绕过",
+          "tools": [
+            "mcp/craft-anything",
+            "skill/security-code-auditor",
+            "skill/re-js-wasm",
+            "skill/apk-dynamic",
+            "skill/src-hunter",
+            "skill/security-best-practices"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "net",
+      "name": "网络通信",
+      "desc": "抓包、端口扫描、代理隧道、DNS、HTTP 调试、CDN 溯源",
+      "subs": [
+        {
+          "id": "http",
+          "name": "HTTP 调试",
+          "desc": "请求构造、抓包、证书、DNS",
+          "tools": [
+            "tool/web_fetch",
+            "mcp/treg",
+            "tool/web_search",
+            "skill/treg",
+            "skill/udp-analysis",
+            "skill/wbexpert__dev-ops-automation-engineer__agent-browser-core",
+            "skill/wbexpert__senior-developer__browser-use",
+            "skill/wbexpert__seo-expert__multi-search-engine",
+            "skill/douyinpay-payment-integration",
+            "skill/gh-cli",
+            "skill/iga-pages",
+            "skill/webapp-testing",
+            "skill/uapi"
+          ]
+        },
+        {
+          "id": "proxy",
+          "name": "代理隧道",
+          "desc": "代理池、SOCKS、端口转发、内网穿透",
+          "tools": [
+            "tool/rw_connect"
+          ]
+        },
+        {
+          "id": "scan",
+          "name": "scan",
+          "desc": "",
+          "tools": [
+            "skill/src-hunter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "research",
+      "name": "信息研究",
+      "desc": "网络搜索、学术检索、文献查询、网页抓取、事实核查",
+      "subs": [
+        {
+          "id": "web",
+          "name": "网络检索",
+          "desc": "搜索、抓网页、聚合",
+          "tools": [
+            "tool/web_fetch",
+            "mcp/treg",
+            "tool/web_search",
+            "skill/treg",
+            "skill/wbexpert__dev-ops-automation-engineer__ima-skills",
+            "skill/wbexpert__seo-expert__fbs-bookwriter",
+            "skill/wbexpert__seo-expert__multi-search-engine",
+            "skill/consulting-analysis"
+          ]
+        },
+        {
+          "id": "paper",
+          "name": "学术文献",
+          "desc": "论文检索、元数据、引用、全文",
+          "tools": [
+            "mcp/pubmed",
+            "mcp/openalex"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "media",
+      "name": "媒体生成",
+      "desc": "图像生成、图像编辑、语音合成、视频、UI 渲染",
+      "subs": [
+        {
+          "id": "image",
+          "name": "图像",
+          "desc": "生成、编辑、风格迁移、看图",
+          "tools": [
+            "tool/generate_image",
+            "tool/edit_image",
+            "tool/read_image",
+            "mcp/treg",
+            "skill/treg",
+            "skill/local-ai-app-integration",
+            "skill/local-ai-use",
+            "skill/wbexpert__ai-image-prompt-engineer__canvas-design",
+            "skill/hook-analyzer-skill",
+            "skill/report-generator-skill"
+          ]
+        },
+        {
+          "id": "ui",
+          "name": "界面渲染",
+          "desc": "卡片渲染、图表、交互组件",
+          "tools": [
+            "tool/render_ui",
+            "skill/wbexpert__ai-image-prompt-engineer__canvas-design",
+            "skill/wbexpert__code-review-expert__frontend-dev",
+            "skill/wbexpert__code-review-expert__impeccable",
+            "skill/wbexpert__senior-project-manager__minimax-docx",
+            "skill/chart-visualization",
+            "skill/frontend-design",
+            "skill/web-artifacts-builder",
+            "skill/character-creator",
+            "skill/hana-app-creator",
+            "skill/recipe-creator"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "memory",
+      "name": "记忆与知识",
+      "desc": "持久记忆、项目文档、历史会话检索、上下文压缩管理",
+      "subs": [
+        {
+          "id": "mem",
+          "name": "持久记忆",
+          "desc": "记事实、召回、热记忆维护",
+          "tools": [
+            "mcp/embed-router",
+            "tool/mnemon_recall",
+            "tool/mnemon_remember",
+            "mcp/hindsight",
+            "skill/mnemon-provider-connect",
+            "skill/hindsight-coding-agent",
+            "skill/wbexpert__code-review-expert__capability-evolver",
+            "skill/quiet-musing"
+          ]
+        },
+        {
+          "id": "doc",
+          "name": "项目文档",
+          "desc": "长文档写入、检索、归档",
+          "tools": [
+            "tool/session_search",
+            "mcp/hindsight",
+            "tool/compress",
+            "tool/acp_status",
+            "tool/mnemon_document_search",
+            "mcp/tool-atlas",
+            "skill/hindsight-coding-agent",
+            "skill/wbexpert__dev-ops-automation-engineer__ima-skills",
+            "skill/wbexpert__seo-expert__anti-distill",
+            "skill/office-suite-notes",
+            "skill/user-guide"
+          ]
+        }
+      ]
+    }
+  ],
+  "tools": {
+    "tool/read": {
+      "ref": "tool/read",
+      "name": "read",
+      "display": "读文件",
+      "kind": "tool",
+      "traits": "按行读取本地 UTF-8 文本文件，带行号返回，支持 offset/limit 分页，大文件必须分页读",
+      "scenes": [
+        "要看清某个文件的实际内容",
+        "改文件前先确认现状",
+        "读配置、日志、源码片段",
+        "把文件内容读出来看",
+        "读某一行到某一行",
+        "打开配置文件看内容",
+        "读一下这个项目的 README 写的啥",
+        "打开 README 或项目说明文件看看内容",
+        "读取指定文件的内容",
+        "看看这个文档里写了什么",
+        "把那个源码文件打开读一遍",
+        "看一眼这个日志文件里的内容"
+      ],
+      "avoid": "查文件路径用 glob；按内容搜用 grep；不要用 shell 的 cat/head/tail",
+      "invoke": "read({file_path, offset?, limit?})",
+      "floor": 0.44,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ],
+        [
+          "data",
+          "file"
+        ]
+      ],
+      "updatedAt": "2026-11-16T13:09:09.190Z"
+    },
+    "tool/write": {
+      "ref": "tool/write",
+      "name": "write",
+      "display": "写文件",
+      "kind": "tool",
+      "traits": "整体创建或覆盖一个 UTF-8 文本文件，父目录自动建；覆盖已有文件前必须先 read 过它",
+      "scenes": [
+        "新建源码/脚本/配置/文档",
+        "整文件重写",
+        "落盘完整产出物",
+        "新建一个文件写入内容",
+        "整份覆盖写文件",
+        "把这几份文档合成一份",
+        "把内容保存成文件",
+        "生成一份报告写进文件",
+        "导出结果到文件",
+        "新建一个测试文件",
+        "把这段实现拆成新模块文件写出去",
+        "整体写出一份新文档"
+      ],
+      "avoid": "局部改动优先 edit；不确定原内容时不要直接覆盖",
+      "invoke": "write({file_path, content})",
+      "floor": 0.42,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ]
+      ],
+      "updatedAt": "2026-11-16T13:16:02.135Z"
+    },
+    "tool/edit": {
+      "ref": "tool/edit",
+      "name": "edit",
+      "display": "精确替换",
+      "kind": "tool",
+      "traits": "按字面量替换文件中的一段文本，old_string 必须唯一匹配（否则报错），支持 replace_all",
+      "scenes": [
+        "改一行 schema",
+        "替换一段配置值",
+        "修正函数实现",
+        "批量改同一处",
+        "精确替换文件里的某段文字",
+        "改一行代码",
+        "定点修改配置值",
+        "把某个单文件里的配置值精确改掉",
+        "已知文件路径时直接改里面那几个字段",
+        "给已有的测试文件补几行用例",
+        "加单元测试用例"
+      ],
+      "avoid": "大范围重写用 write；需要正则应走脚本",
+      "invoke": "edit({file_path, old_string, new_string, replace_all?})",
+      "floor": 0.42,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ]
+      ],
+      "updatedAt": "2026-11-16T13:09:10.003Z"
+    },
+    "tool/glob": {
+      "ref": "tool/glob",
+      "name": "glob",
+      "display": "按路径找文件",
+      "kind": "tool",
+      "traits": "按 glob 模式匹配文件路径（不是目录），含隐藏与忽略文件，按修改时间排序返回最多 100 条",
+      "scenes": [
+        "不知道文件在哪先定位",
+        "列某个目录下的所有 .ts",
+        "找最近改过的文件",
+        "按文件名或路径模式找文件",
+        "列出目录下所有某类文件"
+      ],
+      "avoid": "按内容找用 grep；不要用 shell find",
+      "invoke": "glob({pattern, path?})",
+      "categories": [
+        [
+          "code",
+          "edit"
+        ],
+        [
+          "data",
+          "file"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:33:35.501Z",
+      "floor": 0.42
+    },
+    "tool/grep": {
+      "ref": "tool/grep",
+      "name": "grep",
+      "display": "按内容搜索",
+      "kind": "tool",
+      "traits": "ripgrep 正则搜索文件内容，返回带行号的匹配行，按文件分组，上限 250 条",
+      "scenes": [
+        "找某个函数/常量在哪定义",
+        "找所有调用点",
+        "搜配置键",
+        "定位报错文案",
+        "在目录里搜哪个文件提到了某个字符串",
+        "按内容找代码",
+        "正则搜文本",
+        "搜出所有包含 timeout 这个键的配置内容",
+        "找出所有用到某个配置键的地方",
+        "按字段名搜索它在源码里出现的位置"
+      ],
+      "avoid": "按文件名找用 glob；不要用 shell grep/rg",
+      "invoke": "grep({pattern, path?, include?})",
+      "floor": 0.44,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ],
+        [
+          "data",
+          "text"
+        ],
+        [
+          "data",
+          "file"
+        ]
+      ],
+      "updatedAt": "2026-11-16T13:16:02.591Z"
+    },
+    "tool/shell": {
+      "ref": "tool/shell",
+      "name": "shell",
+      "display": "终端执行",
+      "kind": "tool",
+      "traits": "在用户配置的默认终端里跑一条命令并回收 stdout/stderr，每次新进程不保留 cwd 与变量，需持久状态用 terminal_open；受 DSH 沙箱约束 万能命令行执行器：任何能用 shell 一条命令完成的事情都走它，包括批处理、管道、重定向、循环。",
+      "scenes": [
+        "跑构建/测试/安装依赖",
+        "调用 node/python/curl 等 CLI",
+        "批量文件操作",
+        "取系统信息",
+        "写个脚本批量处理文件",
+        "批量重命名文件",
+        "跑一条命令看输出",
+        "命令行批处理",
+        "执行系统命令",
+        "定时跑脚本",
+        "杀死卡死的进程",
+        "装个依赖包",
+        "调 git 命令",
+        "看进程占了多少内存",
+        "编译构建项目",
+        "把一堆文件批量转换格式",
+        "这台机器装了什么显卡",
+        "看系统信息与环境变量",
+        "查数据库里的记录",
+        "看端口有没有被占用",
+        "查磁盘还剩多少空间",
+        "看网络通不通 ping 一下",
+        "改一下环境变量",
+        "装个 python 包",
+        "跑一下这段代码看结果",
+        "看这个目录占多大",
+        "批量改文件权限",
+        "起个 docker 容器",
+        "把这个目录下所有 json 配置里的 timeout 值改大",
+        "批量修改多个配置文件中的字段值",
+        "一次性改掉一批文件里的同一个配置项",
+        "扫描整个目录把某个字段统一替换",
+        "用脚本批量改一批文件里的配置值",
+        "跑 pytest 或单元测试看结果"
+      ],
+      "avoid": "要看文本文件内容用 read；要持久 shell 状态用 terminal_open；要交互 stdin 用 terminal",
+      "invoke": "shell({command, description, workdir?, run_in_background?})",
+      "floor": 0.47,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "build"
+        ],
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "auto",
+          "remote"
+        ]
+      ],
+      "updatedAt": "2026-11-16T13:09:09.745Z"
+    },
+    "tool/terminal_open": {
+      "ref": "tool/terminal_open",
+      "name": "terminal_open",
+      "display": "持久终端",
+      "kind": "tool",
+      "traits": "开一个持久终端会话（PTY），跨调用保留 cwd 与变量，可发信号、可读屏幕；出现在用户侧栏",
+      "scenes": [
+        "跑 dev server / watcher",
+        "需要交互 stdin 的程序",
+        "repl、ssh、数据库客户端",
+        "多步命令保留状态",
+        "起个长期跑的服务盯着输出",
+        "需要保持会话状态的交互式命令行",
+        "进 REPL 或 ssh 里连续操作",
+        "需要一直开着的交互式会话",
+        "在终端里连续敲命令"
+      ],
+      "avoid": "一次性命令用 shell 更快",
+      "invoke": "terminal_open({type:\"shell\", cwd?, name?})",
+      "categories": [
+        [
+          "code",
+          "build"
+        ],
+        [
+          "auto",
+          "system"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:32:21.875Z"
+    },
+    "tool/todo_write": {
+      "ref": "tool/todo_write",
+      "name": "todo_write",
+      "display": "任务清单",
+      "kind": "tool",
+      "traits": "记录并更新多步任务清单，勾选完成状态，整表替换",
+      "scenes": [
+        "多步骤工作开工前列计划",
+        "向用户展示进度",
+        "把任务拆成几步列出来",
+        "记一下待办清单",
+        "跟踪多步进度"
+      ],
+      "avoid": "单步琐事不需要",
+      "invoke": "todo_write({todos:[{content, status}]})",
+      "categories": [
+        [
+          "agent",
+          "team"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z",
+      "floor": 0.4,
+      "cap": 0.6
+    },
+    "mcp/craft-anything": {
+      "ref": "mcp/craft-anything",
+      "name": "craft-anything",
+      "display": "二进制分析台",
+      "kind": "mcp",
+      "traits": "MCP 二进制/应用分析工作台：打开 PE/ELF/Mach-O/APK/IPA/ASAR/文件夹为 target，出概览、函数档案、伪代码、汇编、基本块、调用图、字符串导入导出、加固检测、归档对比、特征追踪；Clean room 只做外部观察，Deep mode 接 Ghidra 读内部",
+      "scenes": [
+        "看清一个二进制是什么、用什么写的、有没有壳",
+        "分析某个函数怎么工作",
+        "对比两个版本的产物差异",
+        "追一个界面文案到实现代码",
+        "解 APK/IPA/Electron 包结构",
+        "把安卓包拆开看它引用了哪些库",
+        "反汇编一个可执行文件",
+        "看安装包里都有什么文件"
+      ],
+      "avoid": "纯源码问题用 read/grep；要动态跑起来调试需要 Deep mode 或 Frida toolset",
+      "invoke": "core_target_open({path}) → core_overview_show / native_function_study / core_feature_find",
+      "categories": [
+        [
+          "re",
+          "static"
+        ],
+        [
+          "re",
+          "unpack"
+        ],
+        [
+          "sec",
+          "web"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:30:23.841Z"
+    },
+    "skill/deepseek-re": {
+      "ref": "skill/deepseek-re",
+      "name": "deepseek-re",
+      "display": "逆向总纲技能",
+      "kind": "skill",
+      "traits": "逆向工程方法论技能：从样本识别到静态动态结合的完整流程、工具链选择、证据链要求 逆向工程总纲：先判断文件类型与语言，再决定走静态反编译、动态调试、脱壳还是补丁，通吃 APK/JS/ELF/PE。",
+      "scenes": [
+        "开一个新的逆向任务前先定路线",
+        "不确定该用 IDA 还是 Ghidra 还是 radare",
+        "把安卓包脱壳看逻辑",
+        "APK 反编译",
+        "js 代码混淆还原",
+        "反混淆还原可读代码",
+        "判断这段二进制在干什么",
+        "逆向总流程该走哪几步",
+        "选哪个逆向工具"
+      ],
+      "avoid": "已有明确工具方向时不必加载",
+      "invoke": "skill({name:\"deepseek-re\"})",
+      "categories": [
+        [
+          "re",
+          "static"
+        ],
+        [
+          "re",
+          "dynamic"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:30:23.841Z"
+    },
+    "skill/ida-reverse": {
+      "ref": "skill/ida-reverse",
+      "name": "ida-reverse",
+      "display": "IDA 逆向技能",
+      "kind": "skill",
+      "traits": "IDA Pro 逆向辅助技能，覆盖反编译、交叉引用、类型恢复、脚本批处理",
+      "scenes": [
+        "用 IDA 分析 exe/dll/so/elf/macho",
+        "找密码、找算法、漏洞分析"
+      ],
+      "avoid": "没装 IDA 时改用 ghidra-analysis",
+      "invoke": "skill({name:\"ida-reverse\"})",
+      "categories": [
+        [
+          "re",
+          "static"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:01.038Z"
+    },
+    "skill/ghidra-analysis": {
+      "ref": "skill/ghidra-analysis",
+      "name": "ghidra-analysis",
+      "display": "Ghidra 分析技能",
+      "kind": "skill",
+      "traits": "Ghidra 无头/图形分析流程，反编译与脚本自动化",
+      "scenes": [
+        "无 IDA 许可证时的反编译",
+        "批量函数分析",
+        "脚本化提取"
+      ],
+      "avoid": "需要 IDA 特有功能时用 ida-reverse",
+      "invoke": "skill({name:\"ghidra-analysis\"})",
+      "categories": [
+        [
+          "re",
+          "static"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:01.246Z"
+    },
+    "skill/elf-local-auth-patcher": {
+      "ref": "skill/elf-local-auth-patcher",
+      "name": "elf-local-auth-patcher",
+      "display": "ELF/APK 授权补丁",
+      "kind": "skill",
+      "traits": "APK/ELF 本地授权替换、卡密校验替换、AArch64 分支补丁、loader/memfd 执行链恢复、payload trailer 保留、重签名与真机验证",
+      "scenes": [
+        "改 APK 里的 so 校验逻辑",
+        "离线授权替换",
+        "补丁后保持可安装可运行",
+        "APK 或 ELF 的授权校验打补丁",
+        "绕过注册码校验",
+        "改二进制里的判断跳转"
+      ],
+      "avoid": "纯静态理解先用 craft-anything 概览",
+      "invoke": "skill({name:\"elf-local-auth-patcher\"})",
+      "categories": [
+        [
+          "re",
+          "patch"
+        ],
+        [
+          "re",
+          "unpack"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:30:23.841Z"
+    },
+    "skill/security-code-auditor": {
+      "ref": "skill/security-code-auditor",
+      "name": "security-code-auditor",
+      "display": "代码安全审计",
+      "kind": "skill",
+      "traits": "源码级安全审计方法：污点跟踪、危险函数识别、鉴权缺口、注入面盘点",
+      "scenes": [
+        "审一段后端代码有没有洞",
+        "上线前做安全检查",
+        "检查代码质量",
+        "审一遍这段代码有没有问题",
+        "做一次代码审查"
+      ],
+      "avoid": "黑盒打点用 Web 安全技能；写单元测试用 shell/edit",
+      "invoke": "skill({name:\"security-code-auditor\"})",
+      "floor": 0,
+      "cap": 0.62,
+      "categories": [
+        [
+          "sec",
+          "web"
+        ],
+        [
+          "code",
+          "debug"
+        ]
+      ],
+      "updatedAt": "2026-11-16T13:09:10.784Z"
+    },
+    "tool/web_fetch": {
+      "ref": "tool/web_fetch",
+      "name": "web_fetch",
+      "display": "抓网页",
+      "kind": "tool",
+      "traits": "拉取指定 HTTP(S) URL 并解码为文本，返回正文供分析，外部内容是不可信数据",
+      "scenes": [
+        "读某个文档页/公告/仓库文件",
+        "核实搜索结果原文",
+        "取 API 返回",
+        "抓一个网页正文存下来",
+        "批量下载页面转文本",
+        "取某个 URL 的完整内容"
+      ],
+      "avoid": "要搜索结果列表用 web_search；要浏览器 DOM 用 windows Scrape use_dom",
+      "invoke": "web_fetch({url})",
+      "categories": [
+        [
+          "net",
+          "http"
+        ],
+        [
+          "research",
+          "web"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:33:35.501Z",
+      "floor": 0.43
+    },
+    "tool/web_search": {
+      "ref": "tool/web_search",
+      "name": "web_search",
+      "display": "网络搜索",
+      "kind": "tool",
+      "traits": "一次最多 10 条查询，结果合并返回摘要与来源 URL 列表",
+      "scenes": [
+        "查最新信息",
+        "找官方文档入口",
+        "核实事实",
+        "搜一下这个报错怎么解决",
+        "查最新的公开信息",
+        "找官方文档地址"
+      ],
+      "avoid": "要正文用 web_fetch 跟进",
+      "invoke": "web_search({queries:[...]})",
+      "floor": 0.44,
+      "cap": 0.65,
+      "categories": [
+        [
+          "research",
+          "web"
+        ],
+        [
+          "net",
+          "http"
+        ]
+      ],
+      "updatedAt": "2026-11-16T13:09:10.782Z"
+    },
+    "mcp/pubmed": {
+      "ref": "mcp/pubmed",
+      "name": "pubmed-biomedical-literature",
+      "display": "生物医学文献",
+      "kind": "mcp",
+      "traits": "MCP 医学文献库：PubMed/PMC/Europe PMC 检索、元数据、全文、引文格式化、MeSH 词表、拼写纠正、iCite 引用指标 覆盖 PubMed / PMC / Europe PMC，找医学、疾病、药物、临床试验、生信方向的论文与全文时首选。",
+      "scenes": [
+        "查某个药物/疾病的研究",
+        "找论文全文",
+        "要标准引用格式",
+        "查 MeSH 主题词",
+        "查某个病的研究进展",
+        "找某药物的临床试验论文",
+        "搜医学文献",
+        "要论文的标准引用格式",
+        "这个症状有什么最新研究",
+        "PubMed 上有没有相关文章",
+        "查期刊论文的影响因子与被引",
+        "这个病有什么治疗方法",
+        "某种疾病的临床研究",
+        "药物疗效的论文",
+        "查一下这个症状的文献",
+        "医学论文检索",
+        "临床试验结果",
+        "查 PMID"
+      ],
+      "avoid": "非生物医学领域用 openalex",
+      "invoke": "pubmed_search_articles → pubmed_fetch_articles → pubmed_fetch_fulltext",
+      "categories": [
+        [
+          "research",
+          "paper"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:32:21.874Z"
+    },
+    "mcp/openalex": {
+      "ref": "mcp/openalex",
+      "name": "openalex-research-catalog",
+      "display": "学术全库",
+      "kind": "mcp",
+      "traits": "MCP OpenAlex 全学科文献目录：作品/作者/来源/机构/主题/关键词/出版商/资助方，支持过滤、排序、分组统计、引用图、语义检索",
+      "scenes": [
+        "跨学科论文检索",
+        "看某领域年度趋势",
+        "查作者与机构产出",
+        "顺引用链找相关工作",
+        "查某个领域的整体研究趋势",
+        "找某位学者的全部论文",
+        "某个机构发表了什么",
+        "跨学科文献统计与引用关系",
+        "这个研究方向近年趋势",
+        "某学者发表过什么",
+        "跨学科文献计量",
+        "查 DOI 与引用数"
+      ],
+      "avoid": "要医学全文用 pubmed",
+      "invoke": "openalex_resolve_name → openalex_search_entities / openalex_analyze_trends",
+      "categories": [
+        [
+          "research",
+          "paper"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:32:21.874Z"
+    },
+    "tool/generate_image": {
+      "ref": "tool/generate_image",
+      "name": "generate_image",
+      "display": "文生图",
+      "kind": "tool",
+      "traits": "按完整视觉描述生成一张图（主体、构图、风格、光线、画面文字），成功后直接附在对话里",
+      "scenes": [
+        "画插图/封面/概念图",
+        "生成占位素材"
+      ],
+      "avoid": "改已有图用 edit_image",
+      "invoke": "generate_image({prompt, aspect_ratio?})",
+      "categories": [
+        [
+          "media",
+          "image"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:01.925Z"
+    },
+    "tool/edit_image": {
+      "ref": "tool/edit_image",
+      "name": "edit_image",
+      "display": "改图",
+      "kind": "tool",
+      "traits": "在保留主体的前提下改已有图：换场景/服装/姿势/光线/风格/构图；支持多图参考与 GIF 动图",
+      "scenes": [
+        "同一角色的新场景",
+        "换风格重绘",
+        "把草图变成成品"
+      ],
+      "avoid": "全新画面用 generate_image",
+      "invoke": "edit_image({prompt, source_path?/source_attachment_id?})",
+      "categories": [
+        [
+          "media",
+          "image"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:02.035Z"
+    },
+    "tool/render_ui": {
+      "ref": "tool/render_ui",
+      "name": "render_ui",
+      "display": "交互卡片",
+      "kind": "tool",
+      "traits": "把结构化 spec 渲染成对话里的可交互 UI 卡片：表格、图表、步骤、对比、表单、3D、流程图；带 action 的组件会把交互回传",
+      "scenes": [
+        "≥3 条并列要点或对比",
+        "指标面板",
+        "流程/架构图",
+        "要用户做选择"
+      ],
+      "avoid": "纯文字讲得清的地方不要套壳",
+      "invoke": "render_ui({spec:{title, items:[...]}})",
+      "categories": [
+        [
+          "media",
+          "ui"
+        ],
+        [
+          "data",
+          "text"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:02.158Z"
+    },
+    "tool/desktop_control": {
+      "ref": "tool/desktop_control",
+      "name": "desktop_control",
+      "display": "桌面控制",
+      "kind": "tool",
+      "traits": "操作真实桌面：移动/点击/拖拽/滚动/输入文本/发键/聚焦窗口/读控件树/列窗口；坐标是物理屏幕像素",
+      "scenes": [
+        "操作没有 API 的 GUI 程序",
+        "点按钮、填表单",
+        "读窗口控件结构",
+        "在这台电脑上点一下按钮",
+        "模拟键盘输入",
+        "操作桌面上的窗口"
+      ],
+      "avoid": "能用 CLI 解决的不要动桌面",
+      "invoke": "desktop_control({action, x?, y?, target?, title?})",
+      "categories": [
+        [
+          "auto",
+          "desktop"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:30:23.841Z"
+    },
+    "tool/screen_view": {
+      "ref": "tool/screen_view",
+      "name": "screen_view",
+      "display": "看屏幕",
+      "kind": "tool",
+      "traits": "截取当前屏幕返回真实图像，可按窗口或区域裁剪，可选坐标标尺与光标位置",
+      "scenes": [
+        "操作桌面前先看现状",
+        "确认动作结果",
+        "让用户指着看",
+        "看一眼屏幕上现在是什么",
+        "截图看当前界面",
+        "确认操作后的画面结果"
+      ],
+      "avoid": "不要用它读文本文件",
+      "invoke": "screen_view({window?, region?})",
+      "categories": [
+        [
+          "auto",
+          "desktop"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:30:23.841Z"
+    },
+    "mcp/windows": {
+      "ref": "mcp/windows",
+      "name": "windows",
+      "display": "Windows 桌面套件",
+      "kind": "mcp",
+      "traits": "MCP Windows 桌面操作：截图、快照（含可交互元素树）、点击、输入、快捷键、滚动、剪贴板、进程列表/终止、注册表读写、等待、Toast 通知、显示信息、网页抓取",
+      "scenes": [
+        "进程卡了要杀",
+        "读写注册表",
+        "剪贴板搬运",
+        "按元素树精确点按钮"
+      ],
+      "avoid": "简单点击可先用 desktop_control",
+      "invoke": "mcp__windows__Snapshot / Process / Registry / Clipboard / Shortcut",
+      "categories": [
+        [
+          "auto",
+          "desktop"
+        ],
+        [
+          "auto",
+          "system"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:02.480Z"
+    },
+    "tool/wsl": {
+      "ref": "tool/wsl",
+      "name": "wsl",
+      "display": "WSL 执行",
+      "kind": "tool",
+      "traits": "在 WSL 里跑 Linux 命令，Windows 路径自动转 /mnt/，可指定发行版、env、stdin、超时、后台；破坏性命令需 allowDangerous",
+      "scenes": [
+        "需要 Linux 工具链",
+        "跨 Win/Linux 文件处理",
+        "装 pip/apt 包"
+      ],
+      "avoid": "纯 Windows 命令用 shell",
+      "invoke": "wsl({command, description, distro?, asRoot?})",
+      "categories": [
+        [
+          "auto",
+          "remote"
+        ],
+        [
+          "auto",
+          "system"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:02.570Z"
+    },
+    "tool/rw_connect": {
+      "ref": "tool/rw_connect",
+      "name": "rw_connect",
+      "display": "远程机器连接",
+      "kind": "tool",
+      "traits": "SSH 连远端主机：密码/私钥/agent/keyboard-interactive，支持 ~/.ssh/config 别名、ProxyJump、openssh 后端（GSSAPI）、已存机器注册表与重绑定",
+      "scenes": [
+        "连另一台机器干活",
+        "跨机部署与排障",
+        "连到那台测试机上去部署",
+        "ssh 到远端服务器干活",
+        "连远程机器改文件"
+      ],
+      "avoid": "本机命令用 shell",
+      "invoke": "rw_connect({machineId?/host, username?})",
+      "categories": [
+        [
+          "auto",
+          "remote"
+        ],
+        [
+          "net",
+          "proxy"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:30:23.841Z"
+    },
+    "tool/remote_send_message": {
+      "ref": "tool/remote_send_message",
+      "name": "remote_send_message",
+      "display": "派任务给远端会话",
+      "kind": "tool",
+      "traits": "向远端 Harness 会话发文本任务或追问，走 Host 队列与既有权限；需要唯一 operationId 去重",
+      "scenes": [
+        "多机协同开发",
+        "远程长任务托管"
+      ],
+      "avoid": "本机委派用 summon_expert / subagent",
+      "invoke": "remote_send_message({hostId, workspaceId, sessionId, operationId, message})",
+      "categories": [
+        [
+          "auto",
+          "remote"
+        ],
+        [
+          "agent",
+          "dispatch"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:02.781Z"
+    },
+    "tool/summon_expert": {
+      "ref": "tool/summon_expert",
+      "name": "summon_expert",
+      "display": "召唤单个专家",
+      "kind": "tool",
+      "traits": "从合并花名册（628 位）召唤一位领域专家跑完整任务，带该专家 persona 与工具面，同步等结果；任务书需自包含",
+      "scenes": [
+        "把某块专业工作整体交出去",
+        "需要特定角色视角复核",
+        "找个代码审查专家看看这段实现",
+        "让某个领域的专家来把关",
+        "这段代码帮我找行家审一下",
+        "叫一个安全审计专家看这个模块",
+        "这个活找个对口的专家来做"
+      ],
+      "avoid": "多个专家并行用 summon_experts；要延续对话用 subagent",
+      "invoke": "summon_expert({expert:\"bundled-core/code-reviewer\", task:\"...\", readOnly?})",
+      "categories": [
+        [
+          "agent",
+          "dispatch"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z"
+    },
+    "tool/summon_experts": {
+      "ref": "tool/summon_experts",
+      "name": "summon_experts",
+      "display": "批量召唤专家",
+      "kind": "tool",
+      "traits": "并行召唤多位专家（≤8，并发 4），每人独立任务书，部分失败不影响其余；可 stagger 预热缓存",
+      "scenes": [
+        "需要多领域同时产出",
+        "一支小队干一个大活",
+        "这几块并行分工给几个专家做",
+        "同时叫几个不同领域的专家",
+        "多领域并行审一遍"
+      ],
+      "avoid": "单个专家用 summon_expert 更省",
+      "invoke": "summon_experts({experts:[{expert, task}], stagger?})",
+      "categories": [
+        [
+          "agent",
+          "dispatch"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z"
+    },
+    "tool/list_experts": {
+      "ref": "tool/list_experts",
+      "name": "list_experts",
+      "display": "专家名册",
+      "kind": "tool",
+      "traits": "列出合并花名册：不带参数给来源与数量，带 bySource 展开该来源专家名",
+      "scenes": [
+        "不确定有没有对口专家",
+        "看某来源包有哪些人",
+        "有没有对口的专家可以叫",
+        "花名册里都有谁",
+        "某个来源包有哪些专家"
+      ],
+      "avoid": "知道专家名时直接 summon",
+      "invoke": "list_experts({bySource?})",
+      "categories": [
+        [
+          "agent",
+          "dispatch"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z",
+      "cap": 0.64
+    },
+    "tool/subagent": {
+      "ref": "tool/subagent",
+      "name": "subagent",
+      "display": "派子代理",
+      "kind": "tool",
+      "traits": "把自包含任务交给一个独立上下文的子代理，立即返回名字，完成时自动通知；可用 send_message 继续对话",
+      "scenes": [
+        "独立调研/审查/实现，不吃主上下文",
+        "长任务后台跑"
+      ],
+      "avoid": "需要领域 persona 时用 summon_expert",
+      "invoke": "subagent({description, prompt, name?, cwd?})",
+      "categories": [
+        [
+          "agent",
+          "dispatch"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z",
+      "cap": 0.66
+    },
+    "tool/subagent_fork": {
+      "ref": "tool/subagent_fork",
+      "name": "subagent_fork",
+      "display": "分叉子代理",
+      "kind": "tool",
+      "traits": "派生一个继承本次对话已完成轮次的子代理，适合接着当前讨论继续的活",
+      "scenes": [
+        "基于刚才的结论做后续分析",
+        "让另一个 agent 复核本会话的改动"
+      ],
+      "avoid": "与当前对话无关的任务用 subagent",
+      "invoke": "subagent_fork({description, prompt})",
+      "categories": [
+        [
+          "agent",
+          "dispatch"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z",
+      "cap": 0.66
+    },
+    "tool/agent_teams_create": {
+      "ref": "tool/agent_teams_create",
+      "name": "agent_teams_create",
+      "display": "建协作团队",
+      "kind": "tool",
+      "traits": "创建 AgentTeams 团队，approval=required 时先出计划卡等用户批准再开工；可在同一次调用里给全套 roster 与任务 DAG",
+      "scenes": [
+        "多角色分工的大任务",
+        "需要质量门禁（需求→实现→验证→评审→集成）"
+      ],
+      "avoid": "一两次委派用 summon",
+      "invoke": "agent_teams_create({name, description, approval:\"required\", plan:{members,tasks}})",
+      "categories": [
+        [
+          "agent",
+          "team"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:04.691Z"
+    },
+    "tool/agent_teams_status": {
+      "ref": "tool/agent_teams_status",
+      "name": "agent_teams_status",
+      "display": "团队状态",
+      "kind": "tool",
+      "traits": "读团队快照：成员活动、任务状态/负责人/依赖/产出、队长可见全部邮箱",
+      "scenes": [
+        "派活后看进度",
+        "判断哪个任务卡住了"
+      ],
+      "avoid": "不要用它做忙轮询",
+      "invoke": "agent_teams_status()",
+      "categories": [
+        [
+          "agent",
+          "team"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z",
+      "cap": 0.62
+    },
+    "tool/team_task_create": {
+      "ref": "tool/team_task_create",
+      "name": "team_task_create",
+      "display": "建共享任务",
+      "kind": "tool",
+      "traits": "在共享任务板创建一条无主待办，可挂 blocked_by 前置与写作用域",
+      "scenes": [
+        "拆活给团队",
+        "记录待办与依赖"
+      ],
+      "avoid": "正式质量门禁任务用 agent_teams_create_task",
+      "invoke": "team_task_create({subject, description, blocked_by?, write_scopes?})",
+      "categories": [
+        [
+          "agent",
+          "team"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:04.886Z"
+    },
+    "tool/workflow": {
+      "ref": "tool/workflow",
+      "name": "workflow",
+      "display": "脚本化扇出",
+      "kind": "tool",
+      "traits": "用 JS 脚本编排大规模子代理：agent/pipeline/parallel/phase/log 钩子，结果结构化返回；无文件与网络能力，干活的是 agent",
+      "scenes": [
+        "几十上百个文件批量审计/迁移",
+        "多角度并行调研后汇总",
+        "对抗性验证一批结论",
+        "把一堆文件并行处理一遍",
+        "批量任务编排脚本",
+        "一次派很多个子任务出去"
+      ],
+      "avoid": "一两个委派用 subagent 就够",
+      "invoke": "workflow({script, meta:{name, description}})",
+      "categories": [
+        [
+          "agent",
+          "dispatch"
+        ],
+        [
+          "data",
+          "file"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:30:23.841Z"
+    },
+    "tool/skill": {
+      "ref": "tool/skill",
+      "name": "skill",
+      "display": "加载技能",
+      "kind": "tool",
+      "traits": "加载某个技能的完整正文（方法论、前提、分支、反证要求），加载后按其执行",
+      "scenes": [
+        "任务命中技能目录里的条目前先读它",
+        "需要领域标准流程"
+      ],
+      "avoid": "不知道该用哪个技能先用 embed-router 的 route_lookup",
+      "invoke": "skill({name})",
+      "categories": [
+        [
+          "agent",
+          "skill"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:05.068Z"
+    },
+    "mcp/embed-router": {
+      "ref": "mcp/embed-router",
+      "name": "embed-router",
+      "display": "语义路由",
+      "kind": "mcp",
+      "traits": "MCP 语义检索（Qwen3-Embedding-4B）：技能路由 route_lookup 扫技能库 name+description 给余弦分；semantic_file_search 对目录建向量索引查文件片段；semantic_rank/similarity 做排序与相似度",
+      "scenes": [
+        "一句话需求该配哪个技能",
+        "在未知目录里按语义找代码片段",
+        "给一批候选文本排相关度"
+      ],
+      "avoid": "工具表检索它不管（那层是字符串匹配）",
+      "invoke": "route_lookup({query, topK}) / semantic_file_search({query, path, glob})",
+      "categories": [
+        [
+          "agent",
+          "skill"
+        ],
+        [
+          "memory",
+          "mem"
+        ],
+        [
+          "data",
+          "file"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z",
+      "cap": 0.64
+    },
+    "tool/mnemon_recall": {
+      "ref": "tool/mnemon_recall",
+      "name": "mnemon_recall",
+      "display": "记忆召回",
+      "kind": "tool",
+      "traits": "从持久记忆空间召回有界证据，一个初始查询加一次不同查询的细化，走向量语义检索",
+      "scenes": [
+        "需要以前定下的事实/偏好/决策",
+        "接着旧项目干活",
+        "我以前是不是定过这个偏好",
+        "接着旧项目干活需要上下文",
+        "找回以前记下的事实"
+      ],
+      "avoid": "项目长文档用 document_search",
+      "invoke": "mnemon_recall({query, memoryBodyIds?})",
+      "categories": [
+        [
+          "memory",
+          "mem"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.814Z",
+      "cap": 0.66
+    },
+    "tool/mnemon_remember": {
+      "ref": "tool/mnemon_remember",
+      "name": "mnemon_remember",
+      "display": "写入记忆",
+      "kind": "tool",
+      "traits": "把一条自包含的durable洞察归档进记忆空间：分类、重要度、实体、标签",
+      "scenes": [
+        "用户明确要求记住某事",
+        "沉淀关键决策"
+      ],
+      "avoid": "临时进度、对话转储、代码里显而易见的事实都不要写",
+      "invoke": "mnemon_remember({content, category, importance, memoryBodyId})",
+      "categories": [
+        [
+          "memory",
+          "mem"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:05.408Z"
+    },
+    "tool/mnemon_document_search": {
+      "ref": "tool/mnemon_document_search",
+      "name": "mnemon_document_search",
+      "display": "项目文档检索",
+      "kind": "tool",
+      "traits": "在项目级托管文档里做聚焦搜索，返回有界证据；与记忆空间是两套",
+      "scenes": [
+        "查项目架构/约定/决策记录",
+        "找以前写过的方案",
+        "查这个项目的架构约定",
+        "项目里以前写过的方案文档",
+        "找项目的决策记录"
+      ],
+      "avoid": "个人偏好用 recall；已知具体文件路径（如 README、配置或源码）直接读用 read",
+      "invoke": "mnemon_document_search({query, limit})",
+      "floor": 0,
+      "cap": 0.61,
+      "categories": [
+        [
+          "memory",
+          "doc"
+        ]
+      ],
+      "updatedAt": "2026-11-16T13:09:09.742Z"
+    },
+    "tool/session_search": {
+      "ref": "tool/session_search",
+      "name": "session_search",
+      "display": "历史会话检索",
+      "kind": "tool",
+      "traits": "在本工作区的历史会话里全文搜索，每个会话返回最强匹配事件；可再 trace 看血缘",
+      "scenes": [
+        "找以前怎么解决同类问题",
+        "回忆某次改动的原因",
+        "把上次聊过的方案找出来",
+        "翻以前会话里说过的结论",
+        "回忆之前定过的做法",
+        "把上次聊的那个方案找出来",
+        "刚才那个报错的栈追踪是啥意思",
+        "以前遇到过同样的坑怎么解决的",
+        "翻一下之前会话里定过的做法",
+        "回忆上次改这个文件的原因",
+        "找历史对话里的结论",
+        "找以前会话里说过的结论"
+      ],
+      "avoid": "记忆空间里已有的用 recall",
+      "invoke": "session_search({query})",
+      "categories": [
+        [
+          "memory",
+          "doc"
+        ],
+        [
+          "data",
+          "text"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z",
+      "cap": 0.7
+    },
+    "mcp/hindsight": {
+      "ref": "mcp/hindsight",
+      "name": "hindsight",
+      "display": "项目记忆页",
+      "kind": "mcp",
+      "traits": "MCP 仓库记忆：页面清单与正文（架构、组件、约定、决策、在办事项）、混合检索、深度反思 WHY、文档摄入、同步状态",
+      "scenes": [
+        "非平凡任务开工前先读项目已知",
+        "问「为什么当初这样定」"
+      ],
+      "avoid": "一次性事实用 mnemon",
+      "invoke": "hindsight_list_pages / read_page / search_pages / reflect",
+      "categories": [
+        [
+          "memory",
+          "doc"
+        ],
+        [
+          "memory",
+          "mem"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:05.735Z"
+    },
+    "tool/compress": {
+      "ref": "tool/compress",
+      "name": "compress",
+      "display": "上下文压缩",
+      "kind": "tool",
+      "traits": "把自己写好的自包含摘要替换掉一批已消费对话区间，多个区间一次批量提交；摘要即唯一记录，务必保留路径/签名/报错/决策理由",
+      "scenes": [
+        "上下文快满又必须继续",
+        "长任务中段整理"
+      ],
+      "avoid": "内容还会用到就别压",
+      "invoke": "compress({content})",
+      "categories": [
+        [
+          "memory",
+          "doc"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z",
+      "cap": 0.6
+    },
+    "tool/read_image": {
+      "ref": "tool/read_image",
+      "name": "read_image",
+      "display": "读图",
+      "kind": "tool",
+      "traits": "读取本地 PNG/JPEG/WebP/GIF 并返回图像本身，大图自动降采样",
+      "scenes": [
+        "看截图/示意图/设计稿",
+        "核对图像内容"
+      ],
+      "avoid": "要更高分辨率用 acp_read_original_image",
+      "invoke": "read_image({file_path})",
+      "categories": [
+        [
+          "media",
+          "image"
+        ],
+        [
+          "data",
+          "file"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:05.981Z"
+    },
+    "tool/acp_status": {
+      "ref": "tool/acp_status",
+      "name": "acp_status",
+      "display": "上下文用量",
+      "kind": "tool",
+      "traits": "查看上下文占用与可压缩区间；可列消息级明细、按工具过滤、看压缩块账本",
+      "scenes": [
+        "判断该不该压缩",
+        "定位最占 token 的消息"
+      ],
+      "avoid": "不需要频繁查",
+      "invoke": "acp_status({scope?, view?, tool?})",
+      "categories": [
+        [
+          "memory",
+          "doc"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:39:57.815Z",
+      "cap": 0.58
+    },
+    "mcp/treg": {
+      "ref": "mcp/treg",
+      "name": "treg",
+      "display": "外部数据与生成",
+      "kind": "mcp",
+      "traits": "MCP 外部能力网关：SEO/SERP、外链、社交与趋势、人物公司信息、广告、抓取、图像与视频生成、语音；先 catalog_search 说想干什么，再 catalog_get 看参数价格，再 call",
+      "scenes": [
+        "需要外部实时数据但没 API key",
+        "批量抓取/生成素材",
+        "查站点排名与外链"
+      ],
+      "avoid": "能 web_fetch 解决的不要花钱",
+      "invoke": "catalog_search → catalog_get → call({endpoint_id, params})",
+      "categories": [
+        [
+          "research",
+          "web"
+        ],
+        [
+          "media",
+          "image"
+        ],
+        [
+          "net",
+          "http"
+        ]
+      ],
+      "updatedAt": "2026-11-16T12:27:06.213Z"
+    },
+    "skill/re-dispatch": {
+      "ref": "skill/re-dispatch",
+      "name": "re-dispatch",
+      "display": "逆向统一路由层",
+      "kind": "skill",
+      "traits": "逆向总入口路由器：先做 3 分钟静态判定（文件头/架构/段表/熵值），再匹配保护方案，输出「该走哪条技能链、按什么顺序、每步验收标准」。自带 re-detect.py 检测器，一条命令给出类型/架构/熵值/PT_LOAD/候选加固方案带置信度。核心价值是消除「该用哪个技能」的猜谜，避免不做判定直接上工具白跑。",
+      "scenes": [
+        "这个文件怎么逆，从哪开始",
+        "该用哪个逆向技能",
+        "拿到一个不认识的样本先判断是什么类型",
+        "不确定是哪种加固/壳，先做保护识别",
+        "给我一条完整的逆向链路和每步验收标准",
+        "这个 .so / .apk / exe / .mjs 该走静态还是动态"
+      ],
+      "avoid": "已知加壳类型且已确定技能链时，直接走对应技能，不必重复路由；只读源码或普通代码审查不走这里；单纯查某个 API 用法不需要路由。",
+      "invoke": "skill({name:\"re-dispatch\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "route"
+        ],
+        [
+          "agent",
+          "skill"
+        ]
+      ],
+      "updatedAt": "2026-11-16T14:53:24.565Z"
+    },
+    "skill/re-evidence": {
+      "ref": "skill/re-evidence",
+      "name": "re-evidence",
+      "display": "逆向证据链规范",
+      "kind": "skill",
+      "traits": "证据链与产物规范：规定 evidence/ 目录分层（00-dispatch/01-original/02-static/03-runtime/04-recovery/90-verify + deliver/ + notes/），每个关键结论必须挂五要素（来源文件、完整命令、精确时间、SHA256 前 16 位、判据），统一交付物为 report/algo/patch/verify.sh/README，支持一键复现与回滚。解决「第 3 步 dump 用的哪个参数来着、改了 4 次不知道哪次对」这类灾难。",
+      "scenes": [
+        "长周期逆向项目要能回溯每一步",
+        "多人协作逆向需要交接",
+        "a dump 出来对不上，要查是哪一步的参数错了",
+        "把还原结果整理成可复现的交付物",
+        "每一步结论都要有依据不能靠猜",
+        "要给团队留一份可交接的逆向报告"
+      ],
+      "avoid": "一次性的单步小任务（跑个命令看输出）不需要整套证据目录；纯代码审查不涉及证据链。",
+      "invoke": "skill({name:\"re-evidence\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "evidence"
+        ],
+        [
+          "agent",
+          "team"
+        ]
+      ],
+      "updatedAt": "2026-11-16T14:53:24.566Z"
+    },
+    "mcp/tool-atlas": {
+      "ref": "mcp/tool-atlas",
+      "name": "tool-atlas",
+      "display": "工具库向量目录",
+      "kind": "mcp",
+      "traits": "本地工具库的三层向量目录（总分类 > 子分类 > 工具详述）：用 Qwen3-Embedding 对工具的「特点 + 应用场景」做多路向量检索，返回候选工具交主模型审核是否使用。同一工具可重复挂多个分类路径，避免被单一用途限死。另含发现层：按 ~/.xxx/skills 约定扫本机技能目录与 MCP 工具表，diff 出未收录项，由主模型读材料后决定归类并提交。",
+      "scenes": [
+        "我该用什么工具干这件事",
+        "有没有现成的技能能做这个",
+        "按能力找工具而不是按名字找",
+        "看看工具库里都有哪些分类",
+        "新装了技能想收录进目录",
+        "查一下某个工具的应用场景和禁用条件"
+      ],
+      "avoid": "已知工具名、直接调用即可时不必检索（atlas_search 只做语义召回，不是推荐）；查历史会话用 session_search；查项目文档用 mnemon_document_search。",
+      "invoke": "mcp__tool-atlas__atlas_search({query}) / atlas_browse / atlas_detail / atlas_commit",
+      "floor": 0,
+      "cap": 0.64,
+      "categories": [
+        [
+          "agent",
+          "tool"
+        ],
+        [
+          "agent",
+          "skill"
+        ],
+        [
+          "memory",
+          "doc"
+        ]
+      ],
+      "updatedAt": "2026-11-16T14:53:24.566Z"
+    },
+    "skill/7k-anp-rebuild": {
+      "ref": "skill/7k-anp-rebuild",
+      "name": "7k-anp-rebuild",
+      "display": "7k-ANP 1.6 脱壳重建归档",
+      "kind": "skill",
+      "traits": "归档型资料而非分析器：ANP 1.6（7k 变体）加固样本的脱壳与重建教程、historical_scripts、originals、失败尝试记录、SHA256 清单。提供已跑通流程与踩坑参考，实际样本分析要交给编排技能。",
+      "scenes": [
+        "碰到 ANP 或 7k 变体的加固样本想先看有没有现成流程",
+        "想查之前 ANP 1.6 脱壳重建是怎么跑通的、踩过哪些坑",
+        "需要 ANP 样本的 originals 与 SHA256 清单做比对",
+        "要参考 historical_scripts 里已经验证过的脚本"
+      ],
+      "avoid": "要真的分析一个具体样本时不要停在这里，交给 xigong-auto-reverse / ida-reverse / ghidra-analysis；不是 ANP/7k 家族的保护方案不要套本归档的流程。",
+      "invoke": "skill({name:\"7k-anp-rebuild\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "unpack"
+        ],
+        [
+          "re",
+          "evidence"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:10:42.633Z"
+    },
+    "skill/a-protector-elf-repair": {
+      "ref": "skill/a-protector-elf-repair",
+      "name": "a-protector-elf-repair",
+      "display": "A-Protector ELF 修复",
+      "kind": "skill",
+      "traits": "A-Protector / AProtect / A-Protect / 旧称 ANP 的 Android/Linux AArch64 ELF 取证式还原：MSFT v3 加密描述符容器、扁平或间接 AArch64 loader 流、mapping 捕获、runtime-dump 转独立 ELF、动态链接恢复、constructor 证据、可选本地鉴权续接。强制状态模型 TRIAGE→MSFT_VALID→…→AUTH_OPTIONAL，RUNTIME_REQUIRED 是合法结论。",
+      "scenes": [
+        "样本是 A-Protector 或 ANP 加固的 Android AArch64 ELF，要还原成可独立运行的 ELF",
+        "碰到 MSFT v3 加密描述符容器不知道从哪解",
+        "运行时 dump 下来一块内存镜像，想修回带动态链接的独立 ELF",
+        "需要恢复 constructor 证据或做本地鉴权续接验证",
+        "metadata 布局是没见过的变体，要先做事实级画像再决定能不能复用解码器"
+      ],
+      "avoid": "不要复用上一个样本的 VA、offset、key、constructor 目标或解码器假设；元数据布局未证实或动态基址非零时不要硬套解码器；普通无壳 ELF 不需要走这套状态机。",
+      "invoke": "skill({name:\"a-protector-elf-repair\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "unpack"
+        ],
+        [
+          "re",
+          "static"
+        ],
+        [
+          "re",
+          "evidence"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:10:42.633Z"
+    },
+    "skill/apktool-tool": {
+      "ref": "skill/apktool-tool",
+      "name": "apktool-tool",
+      "display": "apktool 拆包回包",
+      "kind": "skill",
+      "traits": "apktool 最基础的两条命令封装：`apktool d <apk> -o <dir>` 反编译出 smali 与资源，`apktool b <dir>` 回编译到 dist/。不做签名，不含加固对抗。",
+      "scenes": [
+        "想把 APK 拆开拿到 smali 代码和资源文件",
+        "改完 smali 或资源要回编译成新 APK",
+        "要替换 APK 里的资源或改 AndroidManifest",
+        "只想看 APK 结构、不涉及脱壳"
+      ],
+      "avoid": "APK 有加固（classes.dex 异常小、反编译不出真实代码）时先走 apk-unpack 脱壳；需要重签名用 apk-patch；完整逆向链路走 apk-reverse。",
+      "invoke": "skill({name:\"apktool-tool\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "static"
+        ],
+        [
+          "re",
+          "patch"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:10:42.633Z"
+    },
+    "skill/ash12-elf-complete-flow": {
+      "ref": "skill/ash12-elf-complete-flow",
+      "name": "ash12-elf-complete-flow",
+      "display": "Ash-12 类 ELF 完整流程",
+      "kind": "skill",
+      "traits": "elf-local-auth-patcher 的按需分支：处理「扩展名像 .sh 实际是 Android AArch64 ELF loader + 尾部附加加密 payload」的 Ash-12 类样本。含 0x28 字节 trailer 结构（magic/payload_offset/payload_size/duplicate_offset/reserved）、外层字符串解密、RC4 payload 恢复、memfd 执行链、外层本地鉴权 gate 补丁。",
+      "scenes": [
+        "文件后缀是 .sh 但 file/readelf 显示是 Android AArch64 ELF64 PIE",
+        "样本尾部有固定 magic 的 payload trailer、AEDEVPK1 容器或重复 offset 字段",
+        "外层有卡密/授权字段（kami/markcode/sign/code/time/vip）要走本地鉴权 gate 补丁",
+        "执行链经过 memfd_create 或 /proc/self/fd/%d 再落地 payload",
+        "静态补丁验过但必须在真机重新取动态证据"
+      ],
+      "avoid": "不是 Ash-12 类特征（没有 .sh 伪装 + 尾部加密 payload）不要加载本分支，直接走 elf-local-auth-patcher 主流程；不要把过往真机调试记忆当结论，动态验证必须重新采集 logcat/stdout/return code。",
+      "invoke": "skill({name:\"ash12-elf-complete-flow\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "unpack"
+        ],
+        [
+          "re",
+          "patch"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:10:42.633Z"
+    },
+    "skill/asm-analysis": {
+      "ref": "skill/asm-analysis",
+      "name": "asm-analysis",
+      "display": "汇编深度分析（GDB/r2/Frida）",
+      "kind": "skill",
+      "traits": "Linux 环境汇编级逆向的完整链路编排：阶段 0 架构确认 + 指令手册加载、阶段 T 调试环境全量探测（gdb/lldb/pwndbg/gef/peda/r2/objdump/readelf/frida/angr/strace/ltrace/perf/bpftrace）、阶段 O 混淆与加壳识别（UPX/OLLVM/VMProtect）、算法特征识别、编译信息提取、数据结构恢复（vtable/struct）、逐块分析出伪代码。内置每 10 轮生成上下文快照的记忆机制。",
+      "scenes": [
+        "要深入看汇编、需要多工具协同（GDB + r2 + Frida + strace）",
+        "要识别加密或哈希算法、恢复 struct 布局、重建 vtable",
+        "要判断编译器与优化级别、分析内存序或 SIMD 语义",
+        "OLLVM/VMProtect 混淆代码要反混淆",
+        "长对话逆向任务需要定期打快照防幻觉"
+      ],
+      "avoid": "只给一段代码片段不需要跑环境探测；没有可执行文件时脱壳阶段无意义；不是 OOP 目标不用做 vtable 分析；纯 APK 层问题先走 apk-reverse。",
+      "invoke": "skill({name:\"asm-analysis\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "static"
+        ],
+        [
+          "re",
+          "dynamic"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:10:42.633Z"
+    },
+    "skill/craft-anything": {
+      "ref": "skill/craft-anything",
+      "name": "craft-anything",
+      "display": "Craft Anything 桥接说明",
+      "kind": "skill",
+      "traits": "Craft Anything v0.3.0 的桥接技能文档：说明 MCP 连接方式（serverName=craft-anything、连接 key=custom-craft-anything、stdio、工具名前缀 mcp__craft-anything__*）、五步工作流（session_show→target_open→target_triage→enable_toolset→feature_find）、314 个工具按 toolset 分组清单、CLI 用法与故障排查。结论必须挂 evidence id。",
+      "scenes": [
+        "想搞清 craft-anything 的 MCP 工具怎么用、toolset 怎么开",
+        "craft-anything 工具突然 unknown tool，要排查是不是桥断了",
+        "要知道研究某软件/网站该先调哪个 core_* 工具"
+      ],
+      "avoid": "实际研究和分析动作直接调 mcp__craft-anything__* 工具本身，不需要加载这个说明技能；绝对不要 disconnect custom-craft-anything，那是活桥。",
+      "invoke": "skill({name:\"craft-anything\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "static"
+        ],
+        [
+          "agent",
+          "skill"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:10:42.633Z"
+    },
+    "skill/feidun-libhook1-archive": {
+      "ref": "skill/feidun-libhook1-archive",
+      "name": "feidun-libhook1-archive",
+      "display": "飞盾 libHook1 解密归档",
+      "kind": "skill",
+      "traits": "归档型资料：飞盾 CTF libHook1 完整解密还原记录——原始资料、样本与最终产物、证据日志、解密脚本、环境工具、FULL_DECRYPT_RESTORE_REPORT 与 REPRODUCTION 复现报告。提供已验证的解密路线参考。",
+      "scenes": [
+        "分析飞盾或 libHook 系列加壳样本时想查已验证的解密路线",
+        "想复现 libHook1 的解密还原全过程",
+        "需要飞盾 CTF 样本的原始资料与最终产物做比对"
+      ],
+      "avoid": "具体执行交给通用逆向编排技能（xigong-auto-reverse / ida-reverse / ghidra-analysis）；不是飞盾/libHook 家族的样本不要套本归档。",
+      "invoke": "skill({name:\"feidun-libhook1-archive\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "unpack"
+        ],
+        [
+          "re",
+          "evidence"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:10:42.633Z"
+    },
+    "skill/leanrea": {
+      "ref": "skill/leanrea",
+      "name": "leanrea",
+      "display": "leanrea 纯 CLI 快速逆向",
+      "kind": "skill",
+      "traits": "不依赖 MCP 的纯本地 CLI 逆向速查手册：按 file/magic 先路由、一次批量化侦察、只切目标片段不整文件 cat、结论必须标 seen（引 file:offset 或符号）还是 inferred、找不到的事实记 unknown。覆盖 Electron/JS bundle、Mach-O/ELF/PE、Go/Rust/.NET/Flutter/WASM、APK、SQLite、pcap、firmware、网站。",
+      "scenes": [
+        "想用最少的工具调用（2-4 次）快速搞清一个二进制或 Electron 应用是怎么做的",
+        "目标是 Go/Rust/.NET/Flutter/WASM 编译产物，需要提取版本与依赖",
+        "要比较两个 build 的差异",
+        "要判断某个功能是怎么实现的、代码藏在哪（.webpack/.vite）",
+        "手边没有 MCP 或不想依赖 MCP，只用本地 CLI"
+      ],
+      "avoid": "需要结构化证据链与可复现产物时改用 re-evidence；需要深dump内存或hook运行时用 asm-analysis / ida-reverse；纯 APK 加固脱壳走 apk-unpack。",
+      "invoke": "skill({name:\"leanrea\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "static"
+        ],
+        [
+          "data",
+          "file"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:10:42.633Z"
+    },
+    "skill/linker-fake-load-unwrapper": {
+      "ref": "skill/linker-fake-load-unwrapper",
+      "name": "linker-fake-load-unwrapper",
+      "display": "linker 假 PT_LOAD 脱壳",
+      "kind": "skill",
+      "traits": "对付滥用 ELF program header 的 linker 式加固：假 PT_LOAD（p_offset=0、p_filesz 大于文件、p_vaddr 高地址）导致 entry 与内存布局异常。流程是解析 PHDR 找假 LOAD → 由 e_entry 减假 p_vaddr 加 p_offset 反推真实入口 → 反汇编 AArch64 stub → 恢复重复 XOR 解密调用（key 常在 w3/x3、指针经 PC 相对 ldr 到 x2/x1）→ 重建运行时镜像，并 carve 内嵌 ELF。附 linker_static_unwrap.py。",
+      "scenes": [
+        "Android AArch64 ELF 的 LOAD 段地址离谱（0xffff0000 之类）或 p_filesz 比文件还大",
+        "e_entry 落在假 LOAD 的虚拟区间里，真实入口要换算",
+        "遇到 linker 加固、假加载器、XOR 运行时解密，要还原真实镜像",
+        "文件里疑似嵌套了第二段 ELF 或被当成 shell 脚本的 ELF 二阶段"
+      ],
+      "avoid": "能在 PHDR 里正常解析出真实 LOAD 的普通 ELF 不要用本技能；不要硬编码偏移，脚本找不到假 LOAD 或恢复不出 XOR 范围时必须先写清 PHDR 推导为什么失败。",
+      "invoke": "skill({name:\"linker-fake-load-unwrapper\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "unpack"
+        ],
+        [
+          "re",
+          "static"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:10:42.633Z"
+    },
+    "skill/mnemon-provider-connect": {
+      "ref": "skill/mnemon-provider-connect",
+      "name": "mnemon-provider-connect",
+      "display": "mnemon 记忆 provider 修复",
+      "kind": "skill",
+      "traits": "修 dsh-mnemon 记忆 provider（以 ByteRover/brv 为已验证实例）的 CLI 连接与账号链路：定位活跃 memory-providers.json（恒为 <dataDir>\\state\\memory-providers.json，别假设 ~/.mnemon）、npm --prefix 装 byterover-cli、自写标准 .cmd shim、node 热改 cliPath、用 mnemon_status / mnemon_recall 验证；涉及 dataDir 分裂与记忆源不健康的排查。",
+      "scenes": [
+        "mnemon 报 `brv was not found` 或记忆 provider 连不上",
+        "要检查或修改 memory-providers.json 里的 cliPath",
+        "改了 dataDir 之后 mnemon_status 仍异常、totalInsights 为 0",
+        "记忆源不健康、需要定位到底读的是哪个目录",
+        "要重装 byterover-cli 并做可用的 shim"
+      ],
+      "avoid": "不是 mnemon / 记忆 provider 的问题不要走这里；改目录前必须先读 cordis.patch.yml 里 mnemon 条目的 storageScope/dataDir，不要凭默认路径假设。",
+      "invoke": "skill({name:\"mnemon-provider-connect\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "memory",
+          "mem"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:10:42.633Z"
+    },
+    "skill/re-failure-cases": {
+      "ref": "skill/re-failure-cases",
+      "name": "re-failure-cases",
+      "display": "逆向故障案例库",
+      "kind": "skill",
+      "traits": "逆向卡壳时的查表技能：症状 → 可能原因 → 判断命令 → 修法，覆盖 ELF/SO 脱壳、APK 加固、OLLVM 反混淆、Frida hook、动态调试、算法还原六大类。目的是避免从头重推一遍。",
+      "scenes": [
+        "逆向做到一半卡住了，想先查有没有同症状的现成案例",
+        "ELF/SO 脱壳失败不知道是哪种原因",
+        "APK 加固后反编译不出真实代码",
+        "OLLVM 反混淆、Frida hook、动态调试、算法还原某一环节卡住",
+        "要按「症状 → 原因 → 判断命令 → 修法」查表"
+      ],
+      "avoid": "不是卡住的状态别查；能一次推出来的简单问题不要进案例库；新问题解决后应该回写进案例库而不是只留在这里。",
+      "invoke": "skill({name:\"re-failure-cases\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "route"
+        ],
+        [
+          "re",
+          "evidence"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/re-js-wasm": {
+      "ref": "skill/re-js-wasm",
+      "name": "re-js-wasm",
+      "display": "前端与 WASM 逆向",
+      "kind": "skill",
+      "traits": "前端与 WASM 侧的逆向：JS 混淆还原、签名算法定位与抽取、WebAssembly 反编译还原、微信小程序 wxapkg 解包、Electron asar 提取、Node 原生模块分析。针对的是网站参数签名、前端加密、WASM 保护、小程序协议。",
+      "scenes": [
+        "网站请求参数有签名或加密，要找签名算法并抽出来",
+        "JS 代码被混淆了要还原",
+        "分析 WebAssembly 模块的保护逻辑或反编译",
+        "微信小程序 wxapkg 要解包",
+        "Electron 应用要提取 asar、看 Node 原生模块"
+      ],
+      "avoid": "需要完整证据链与可复现产物时配合 re-evidence；需要动态运行时分析走 apk-dynamic / asm-analysis；WASM 只是外壳不涉前端逻辑时不必走这套。",
+      "invoke": "skill({name:\"re-js-wasm\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "static"
+        ],
+        [
+          "sec",
+          "web"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/re-verify": {
+      "ref": "skill/re-verify",
+      "name": "re-verify",
+      "display": "逆向结果验收器",
+      "kind": "skill",
+      "traits": "逆向产物的可执行验收器：对还原后的 ELF/APK/算法模块自动跑断言检查，输出 PASS/FAIL 清单，消除「看起来对但跑不起来」的隐患。任何还原动作完成后都应该走这里。",
+      "scenes": [
+        "还原出 ELF/APK/算法模块后要确定它真能跑",
+        "要输出 PASS/FAIL 清单证明修复有效",
+        "避免「看起来对但跑不起来」的交付",
+        "补丁或重建产物要跑一遍自动断言"
+      ],
+      "avoid": "还没做还原时不要先跑验收；纯静态阅读不需要执行验证时不必强上；验收断言要自己写具体判据，不能只看「跑起来了」。",
+      "invoke": "skill({name:\"re-verify\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "evidence"
+        ],
+        [
+          "code",
+          "debug"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/task-mode-router": {
+      "ref": "skill/task-mode-router",
+      "name": "task-mode-router",
+      "display": "任务模式路由器",
+      "kind": "skill",
+      "traits": "任务模式路由手册：用三带判据（build / fix / ambiguous）把任务分到对应工作方式，附与 dsh-router-lite 插件的对照表。用于开工前定调、避免把修补任务当新建任务做。",
+      "scenes": [
+        "要先判断这个任务算 build（造新东西）还是 fix（修现有东西）",
+        "目标模糊、不确定该用哪种工作方式开工",
+        "要对照 dsh-router-lite 插件的行为或排查它的路由判断"
+      ],
+      "avoid": "不是判断 build/fix 的任务不需要走路由；用户已明确指定工作方式时不必再路由一遍。",
+      "invoke": "skill({name:\"task-mode-router\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "agent",
+          "skill"
+        ],
+        [
+          "agent",
+          "team"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/tprotector-tutorial": {
+      "ref": "skill/tprotector-tutorial",
+      "name": "tprotector-tutorial",
+      "display": "TProtector 0715 脱壳教程",
+      "kind": "skill",
+      "traits": "归档型教程：TProtector（0715 版）完整静态脱壳记录——原始样本、关键中间产物、最终成果、脚本、验证证据、分析报告与失败路线修正。提供已跑通的全流程参考。",
+      "scenes": [
+        "样本是 TProtector 0715 版加固，要参照静态脱壳全流程",
+        "想查 TProtector 脱壳的原始样本、关键中间产物与验证证据",
+        "脱壳路线失败过，要对照失败路线的修正记录"
+      ],
+      "avoid": "不是 TProtector 0715 加固的样本不要套本教程；要实际脱壳执行交给 xigong-auto-reverse。",
+      "invoke": "skill({name:\"tprotector-tutorial\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "unpack"
+        ],
+        [
+          "re",
+          "evidence"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/treg": {
+      "ref": "skill/treg",
+      "name": "treg",
+      "display": "treg 外部数据与生成模型",
+      "kind": "skill",
+      "traits": "外部数据与生成模型的统一入口（MCP 服务）：126 家供应商 4100+ 端点，覆盖 SEO/SERP、关键词量、外链、AI 可见性、社媒与趋势、人物公司补全、广告库、网页数据、图像/视频/语音/音乐生成，另有团队自有工具与 GA/GSC。先 catalog_search 说清要做什么，再 catalog_get 看参数与价格（按实测成功率/速度/价格排序），最后 call。",
+      "scenes": [
+        "要 SEO/SERP 排名、关键词搜索量、外链与站点权重数据",
+        "要社媒资料、趋势、人物与公司背景补全、广告库数据",
+        "要用外部生成模型做图、视频、语音、音乐（Seedance/Gemini Image/GPT Image/Seedream/Veo/Wan）",
+        "要调团队自己注册的工具或 Google Analytics/Search Console",
+        "手边没有某个 API 的 key 但需要用它的能力"
+      ],
+      "avoid": "自身已经有 key 或额度充足时不必绕 treg；只需要本地数据或本地生成时走原生工具；一次只花几美分以下的小调用不必先问价但大作业要问。",
+      "invoke": "skill({name:\"treg\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "research",
+          "web"
+        ],
+        [
+          "media",
+          "image"
+        ],
+        [
+          "net",
+          "http"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/udp-analysis": {
+      "ref": "skill/udp-analysis",
+      "name": "udp-analysis",
+      "display": "Android JNI 浮窗源码归档",
+      "kind": "skill",
+      "traits": "源码归档型技能：Android JNI 悬浮窗工程的完整源码（ImGui + ANativeWindowCreator + UDP 通信层 main/draw/net/wire）+ ndk 编译配置。用于研究安卓浮窗绘制、native surface 与 UDP 协议实现。",
+      "scenes": [
+        "研究 Android 浮窗绘制、ImGui native surface 的实现",
+        "要看 ANativeWindowCreator 怎么拿到 native 窗口",
+        "分析 UDP 通信层协议实现",
+        "编译这类 JNI 工程、看 ndk 配置"
+      ],
+      "avoid": "只是想看源码结构不涉协议时不必上 UDP 分析；不是 Android 浮窗/ImGui 场景不用本归档。",
+      "invoke": "skill({name:\"udp-analysis\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "static"
+        ],
+        [
+          "net",
+          "http"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/xigong-auto-reverse": {
+      "ref": "skill/xigong-auto-reverse",
+      "name": "xigong-auto-reverse",
+      "display": "xigong 通用逆向编排",
+      "kind": "skill",
+      "traits": "证据驱动的通用逆向编排器（主入口）：覆盖 Android/Linux/Windows/macOS/裸机上的 APK/DEX/SO/ELF/PE/Mach-O/raw firmware/汇编文本。从格式与文件指纹分流到加固/保护器/VM/OLLVM/Hikari 判定，再走静态、动态、运行时物化、重建与验证全链。",
+      "scenes": [
+        "拿到一个 APK/DEX/SO/ELF/PE/Mach-O/裸固件，要从头走到尾给出结论",
+        "要判断到底加了什么壳、用了哪个保护器/VM/OLLVM/Hikari-LVM15 变体",
+        "crash 归因、反调试归因",
+        "要恢复算法、CFG、类型、间接调用、全局变量、字符串",
+        "要处理 Modified-UPX / ENCYHR / AProtect / linker 假 PT_LOAD / memfd 运行时物化",
+        "需要 IDA headless 或 GUI 分析"
+      ],
+      "avoid": "只想粗略看一眼格式时用 leanrea / triage 更快；纯前端 JS 问题走 re-js-wasm；没有样本路径只问概念可直接回答。",
+      "invoke": "skill({name:\"xigong-auto-reverse\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "route"
+        ],
+        [
+          "re",
+          "static"
+        ],
+        [
+          "re",
+          "unpack"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/xigong-funk-hikari": {
+      "ref": "skill/xigong-funk-hikari",
+      "name": "xigong-funk-hikari",
+      "display": "Hikari/OLLVM 反混淆还原",
+      "kind": "skill",
+      "traits": "Hikari-LLVM / OLLVM 反混淆与明文恢复专精：针对 Android/Linux AArch64 PIE 的 MBA 变形、BCF/不透明谓词、重定位表支撑的 BR/BLR 分发、函数包装器 FCO、运行时字符串解码、高熵容器、扁平匿名 RX/RO/RW 内镜像、内嵌辅助 ELF 与自定义 mmap/mprotect 加载器。",
+      "scenes": [
+        "样本疑似 Hikari-LLVM 或 OLLVM 混淆过的 ELF/SO，要还原明文与语义",
+        "看到 MBA 表达式、不透明谓词 BCF、重定位表支撑的 BR/BLR 分发",
+        "函数包装器 FCO、运行时字符串解码、高熵容器",
+        "扁平匿名 RX/RO/RW 内镜像没有主 ELF magic",
+        "内嵌辅助 ELF 或自定义 mmap/mprotect 加载器"
+      ],
+      "avoid": "不是 Hikari/OLLVM 特征明确的场合先用 xigong-auto-reverse 做总分流；普通无混淆代码不要上反混淆流程。",
+      "invoke": "skill({name:\"xigong-funk-hikari\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "static"
+        ],
+        [
+          "re",
+          "dynamic"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/yingan-tuoxiu": {
+      "ref": "skill/yingan-tuoxiu",
+      "name": "yingan-tuoxiu",
+      "display": "英安/英破 APK 壳重建",
+      "kind": "skill",
+      "traits": "英安（YingAn）/ 英破加固 APK 的稳定重建：针对根 DEX 异常小、v.m.p 或 abcd655xx 壳回调、libabcd / lib*shellservice_dex 原生加载器、受保护 assets、运行时加载的 DEX 映像、隐藏真实 Application/Activity 路由、native 生命周期包装等情形，还原成可正常安装签名的 multidex APK，且不改产品鉴权与授权行为。",
+      "scenes": [
+        "APK 根 DEX 极小或异常，疑似英安/英破加固",
+        "存在 v.m.p 或 abcd655xx 壳回调",
+        "有 libabcd / lib*shellservice_dex 原生加载器",
+        "assets 受保护、DEX 是运行时加载进来的",
+        "隐藏了真实 Application 或 Activity 路由要挖出来",
+        "要把加壳 APK 还原成可正常安装签名的 multidex"
+      ],
+      "avoid": "不是加固 APK 不要走重建流程；只需改包或改逻辑用 apk-patch；纯静态读算法用 apk-reverse；用户没授权自有样本时不适用。",
+      "invoke": "skill({name:\"yingan-tuoxiu\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "unpack"
+        ],
+        [
+          "re",
+          "patch"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/apk-dynamic": {
+      "ref": "skill/apk-dynamic",
+      "name": "apk-dynamic",
+      "display": "APK 动态分析与 Hook",
+      "kind": "skill",
+      "traits": "APK 动态分析与 Hook：Frida 环境搭建、objection 一键探索、通用 Hook 模板、SSL Pinning 绕过、root 检测绕过、网络抓包（mitmproxy / JustTrustMe）、算法参数提取。目标是看运行时行为、抓加密前明文、绕校验。",
+      "scenes": [
+        "要看 APK 运行时行为、抓加密前的明文",
+        "要绕过 SSL Pinning 或 root 检测",
+        "要搭 Frida 环境、用 objection 一键探索",
+        "要抓包（mitmproxy / JustTrustMe）",
+        "要钩某个方法提取算法参数"
+      ],
+      "avoid": "只需要拆包回包不涉 hook 时用 apktool-tool / apk-patch；非 APK 目标的动态调试走 asm-analysis。",
+      "invoke": "skill({name:\"apk-dynamic\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "dynamic"
+        ],
+        [
+          "sec",
+          "web"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/apk-patch": {
+      "ref": "skill/apk-patch",
+      "name": "apk-patch",
+      "display": "APK 改包重签",
+      "kind": "skill",
+      "traits": "APK 改包全链：apktool 拆包回包、smali 修改（绕校验/去广告/改逻辑）、资源替换、dex 直接修补、zipalign 对齐、uber-apk-signer 重签、多签名方案、安装失败排查。",
+      "scenes": [
+        "要改 APK 行为（绕校验、去广告、改逻辑）",
+        "smali 改完要回编译重签并装到设备验证",
+        "要替换资源、改 dex、做 zipalign 对齐",
+        "uber-apk-signer 或多种签名方案选型",
+        "APK 安装失败要排查原因"
+      ],
+      "avoid": "纯静态分析不需要改包；完整逆向链路应该从 apk-reverse 开始；不是自己环境或不涉重签的场合不必跑完整流程。",
+      "invoke": "skill({name:\"apk-patch\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "patch"
+        ],
+        [
+          "re",
+          "static"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/apk-reverse": {
+      "ref": "skill/apk-reverse",
+      "name": "apk-reverse",
+      "display": "APK 逆向全流程主技能",
+      "kind": "skill",
+      "traits": "Android APK 逆向的总入口与全流程编排：环境自检 → 结构分析 → 反编译 → 动态 Hook → 脱壳 → 重签 → 验证。集成 42 个开源工具的调用方式与 14 个常见加固方案的应对策略。",
+      "scenes": [
+        "拿到一个 APK 要从头做到提取算法/绕校验/还原协议",
+        "不确定 APK 类任务该从哪一步开始",
+        "需要环境自检、结构分析、反编译、动态 Hook、脱壳、重签、验证一条龙",
+        "要知道 42 个开源工具哪个适合当前步骤"
+      ],
+      "avoid": "只要拆包回包用 apktool-tool；只要跑 hook 用 apk-dynamic；非 Android 二进制走 xigong-auto-reverse / ida-reverse。",
+      "invoke": "skill({name:\"apk-reverse\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "route"
+        ],
+        [
+          "re",
+          "static"
+        ],
+        [
+          "re",
+          "unpack"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.614Z"
+    },
+    "skill/apk-unpack": {
+      "ref": "skill/apk-unpack",
+      "name": "apk-unpack",
+      "display": "APK 脱壳加固对抗",
+      "kind": "skill",
+      "traits": "Android APK 脱壳与加固对抗：识别 20+ 种加固方案（360/腾讯乐固/桡桡/阿里/网易易盾/爱加密/娜迦/几维/百度等），按有无 root 选择 BlackDex / FRIDA-DEXDump / youpk / dumpDex 等方案，脱壳后做修复与验证。",
+      "scenes": [
+        "classes.dex 异常小、反编译不出真实代码",
+        "assets 里有加密载荷、怀疑加固",
+        "要识别是哪种加固（360/腾讯乐固/桡桡/阿里/网易易盾/爱加密/娜迦/几维/百度等）",
+        "有 root 或无 root 条件下选脱壳方案（BlackDex / FRIDA-DEXDump / youpk / dumpDex）",
+        "脱壳后要修复与验证"
+      ],
+      "avoid": "classes.dex 正常可读时不需要脱壳，直接 apktool-tool / apk-reverse；不是 Android APK 的二进制走 xigong-auto-reverse。",
+      "invoke": "skill({name:\"apk-unpack\"})",
+      "floor": 0,
+      "cap": 0.7,
+      "categories": [
+        [
+          "re",
+          "unpack"
+        ],
+        [
+          "re",
+          "dynamic"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:11.615Z"
+    },
+    "skill/ake__dev-god": {
+      "ref": "skill/ake__dev-god",
+      "name": "ake__dev-god",
+      "display": "dev-god 高阶全栈编程",
+      "kind": "skill",
+      "traits": "面向复杂真实项目的高阶全栈编程助手：从一句目标接手陌生代码库，拆需求、补实现、追根因、做重构、联调前后端，并推到能运行、能验证、能交付。用构建、日志、真实入口、设备或接口证据说话。",
+      "scenes": [
+        "接手一个陌生代码库，从一句目标做到能跑能验",
+        "需求要拆解、实现要补齐、bug 要追到根因",
+        "要完成重构或联调前后端",
+        "鸿蒙 ArkUI、微信小程序等非主流技术栈的工程任务",
+        "疑难 Bug、跳模块任务或长任务续做"
+      ],
+      "avoid": "只问概念、不要求落地时不必进全流程；单文件小改动可直接用 read/write/edit；只做前端或只做后端时不必上全栈编排。",
+      "invoke": "skill({name:\"ake__dev-god\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ],
+        [
+          "code",
+          "debug"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/hindsight-coding-agent": {
+      "ref": "skill/hindsight-coding-agent",
+      "name": "hindsight-coding-agent",
+      "display": "Hindsight 记忆用法",
+      "kind": "skill",
+      "traits": "本机 Hindsight coding-agent 记忆插件的使用说明（就是那个 🧠 横幅背后的东西）：如何入库、页面是什么、如何按仓库配置 bank（关掉/改名/git 深度）、出问题时怎么排查。",
+      "scenes": [
+        "用户说「存到 hindsight」「记住这个」",
+        "要问记忆页是什么、怎么按仓库配 bank",
+        "想关掉或改名 per-repo 记忆、调 git 深度",
+        "记忆相关的功能看起来坏了"
+      ],
+      "avoid": "不是这个机子的 Hindsight 问题不要走这里；普通笔记入库用 mnemon_remember。",
+      "invoke": "skill({name:\"hindsight-coding-agent\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "memory",
+          "mem"
+        ],
+        [
+          "memory",
+          "doc"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/hyperloom-workload-optimizer": {
+      "ref": "skill/hyperloom-workload-optimizer",
+      "name": "hyperloom-workload-optimizer",
+      "display": "Hyperloom 推理吞吐优化",
+      "kind": "skill",
+      "traits": "Hyperloom 多 agent 优化器：给定模型/框架/负载/目标/时间预算，自主探索该负载下哪些杆子该拉（服务与配置参数及环境、框架开启与源码补丁、热 GPU kernel 重写），每个候选都跑 benchmark，最后返回产生最大收益的优化栈。",
+      "scenes": [
+        "要在 AMD Instinct GPU 上提升 LLM 推理吞吐",
+        "给定模型/框架/负载（TP/EP、并发、ISL/OSL、精度）与时间预算，要找出最优参数组合",
+        "要试服务配置参数与环境变量、框架开启与源码补丁、热 GPU kernel 改写这几类手段",
+        "要拿到有 benchmark 支撑的优化收益报告"
+      ],
+      "avoid": "不是 AMD Instinct GPU 环境不适用；单一知识性问题直接答，不需要跑整套多 agent 优化器；无时间预算的探索不要用（它有明确预算约束）。",
+      "invoke": "skill({name:\"hyperloom-workload-optimizer\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "code",
+          "build"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/indiv-guipi__find-skills": {
+      "ref": "skill/indiv-guipi__find-skills",
+      "name": "indiv-guipi__find-skills",
+      "display": "Find Skills 技能发现",
+      "kind": "skill",
+      "traits": "场景驱动 + 关键词双模式的技能发现工具：从官方内置、本地已安装、SkillHub、虾评、GitHub、ClawHub 六层联合搜索，推荐最合适的技能并支持一键安装。",
+      "scenes": [
+        "不知道装什么技能，用自然语言描述场景找（「我想做个海报」「找个薅羊毛技能」）",
+        "用户明说「找技能」「安装技能」「有没有做 XX 的技能」",
+        "要从官方内置、本地已装、SkillHub、虾评、GitHub、ClawHub 六层联合搜索",
+        "要一键安装搜到的技能"
+      ],
+      "avoid": "已经知道技能名时直接 skill() 加载；只是自己写一个技能时用 create_skill / skill-creator。",
+      "invoke": "skill({name:\"indiv-guipi__find-skills\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "agent",
+          "skill"
+        ],
+        [
+          "agent",
+          "tool"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/lemonade-router-builder": {
+      "ref": "skill/lemonade-router-builder",
+      "name": "lemonade-router-builder",
+      "display": "Lemonade 路由策略生成",
+      "kind": "skill",
+      "traits": "把自然语言的路由意图转成合法的 Lemonade `collection.router` policy JSON，并做校验。只生成与验证 JSON，不负责注册或调活服务。",
+      "scenes": [
+        "要把请求按意图分流到不同模型（「敏感查询走 X、其余走 Y」）",
+        "要生成 collection.router 或 hybrid-router 的 policy JSON",
+        "要在小模型与云端大模型之间分流量",
+        "要给路由加 PII/越狱/话题判断"
+      ],
+      "avoid": "不涉及 Lemonade 时直接写路由逻辑；需要真实注册到服务器时本技能只生成 JSON，不帮你注册。",
+      "invoke": "skill({name:\"lemonade-router-builder\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "code",
+          "edit"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/local-ai-app-integration": {
+      "ref": "skill/local-ai-app-integration",
+      "name": "local-ai-app-integration",
+      "display": "应用内集成本地 AI",
+      "kind": "skill",
+      "traits": "用 Embeddable Lemonade 把本地 AI 能力集成进应用：本地 LLM、embedding、图像生成、语音转写与合成，用来替掉或补充云 API。边界是「改用户应用」，不是「让 agent 自己生成」。",
+      "scenes": [
+        "给现有应用加本地/离线/私有 AI 能力",
+        "要加入本地 LLM、embedding、图像生成、语音转写或 TTS",
+        "要把 OpenAI / Anthropic / Ollama 等云 API 换成或补上本地后端",
+        "要改的是用户自己的应用代码，而不是让 agent 自己生成东西"
+      ],
+      "avoid": "只想要 agent 自己在本机生图/转写时用 local-ai-use；不是改用户应用、只想单次本机请求也不走这里。",
+      "invoke": "skill({name:\"local-ai-app-integration\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ],
+        [
+          "media",
+          "image"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/local-ai-use": {
+      "ref": "skill/local-ai-use",
+      "name": "local-ai-use",
+      "display": "本机生成路线（Lemonade）",
+      "kind": "skill",
+      "traits": "让本 agent 改用用户自己机器上的 Lemonade Server 做图生、音频转写、语音合成，而不是付费云 API。可做持久路由改造（聊天留云、图片走本地），也可做单次本机请求。",
+      "scenes": [
+        "要让 agent 以后都走本机生图/转写/合成语音而不烧云 API",
+        "要把「以后默认本机生成」这个路由持久改掉",
+        "要单次请求也在本机、离线完成",
+        "聊天继续走云、图片走本地这种混合配置"
+      ],
+      "avoid": "只想要单次一次性云端生图不必改全局路由；企业部署/多用户服务不归这里。",
+      "invoke": "skill({name:\"local-ai-use\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "media",
+          "image"
+        ],
+        [
+          "auto",
+          "system"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/tracelens-analysis-orchestrator": {
+      "ref": "skill/tracelens-analysis-orchestrator",
+      "name": "tracelens-analysis-orchestrator",
+      "display": "TraceLens 分析编排",
+      "kind": "skill",
+      "traits": "用 TraceLens 编排模块化的 PyTorch profiler trace 分析：生成 perf 报告、准备分类数据、并行跑系统级与计算 kernel 子代理、校验输出，最后写一份按优先级排序的分析报告。",
+      "scenes": [
+        "要分析 PyTorch profiler trace、出 perf 报告",
+        "要比对两个 trace 的差异",
+        "要跑系统级与计算 kernel 的子代理并行分析",
+        "要输出按优先级排序的 analysis.md 报告"
+      ],
+      "avoid": "不是 AMD GPU profiler trace 的场合用普通性能分析即可；不跑完整编排时可直接用单项 trace 分析工具。",
+      "invoke": "skill({name:\"tracelens-analysis-orchestrator\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "data",
+          "text"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/quark-install": {
+      "ref": "skill/quark-install",
+      "name": "quark-install",
+      "display": "Quark 安装与环境",
+      "kind": "skill",
+      "traits": "安装与校验 AMD Quark，并保证选定 Python 环境里的 PyTorch 与加速器匹配。覆盖 PyPI 通用包、精确匹配的 native 包、本地 wheel、本地源码四种装法；不负责单独装 PyTorch，也不做 ONNX Runtime。",
+      "scenes": [
+        "要装或校验 AMD Quark",
+        "pip install amd-quark 失败、quark 导入报错",
+        "要为选中环境配好与加速器匹配的 PyTorch",
+        "遇到 Quark kernel compiler 错误"
+      ],
+      "avoid": "用 PyTorch / HuggingFace 模型做量化时用 quark-torch-llm-ptq；只是推理部署用 serving-llms-on-instinct。",
+      "invoke": "skill({name:\"quark-install\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "build"
+        ],
+        [
+          "auto",
+          "system"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/quark-torch-llm-ptq": {
+      "ref": "skill/quark-torch-llm-ptq",
+      "name": "quark-torch-llm-ptq",
+      "display": "Quark PTQ 量化工作流",
+      "kind": "skill",
+      "traits": "端到端的 AMD Quark 训练后量化流程：检查 Hub 或本地模型、选量化方案、生成可复现的产物、申请执行审批、产出量化后的模型。面向 Llama/Qwen/Mistral 这类 transformer LLM 的 FP8/INT4 量化。",
+      "scenes": [
+        "要用 AMD Quark 对 PyTorch/HuggingFace 模型做训练后量化",
+        "要选 FP8 / INT4 等量化方案并产出可复现产物",
+        "要检查 Hub 或本地模型并制定量化计划",
+        "要一份可重跑的量化脚本与配置"
+      ],
+      "avoid": "不是 PyTorch/HuggingFace LLM 的量化需求不适用；只部署不量化用 serving 系列；ONNX 模型输入不归这里。",
+      "invoke": "skill({name:\"quark-torch-llm-ptq\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "code",
+          "build"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/reverse-engineer-anything": {
+      "ref": "skill/reverse-engineer-anything",
+      "name": "reverse-engineer-anything",
+      "display": "REA 多平台逆向",
+      "kind": "skill",
+      "traits": "REA（Reverse Engineer Anything）：对原生、托管、Electron/JS、打包、固件、浏览器目标做系统逆向。用已发布产物或指定的运行时证据解释功能、比对版本、反编译代码、指导重建。",
+      "scenes": [
+        "要逆原生、托管、Electron/JavaScript、打包产物、固件或浏览器目标",
+        "要用已发布的产物或运行时证据解释某个功能是怎么做的",
+        "要比对版本、反编译代码、指导重建",
+        "需要一套可推进的逆向流程而不是零数命令"
+      ],
+      "avoid": "只想快速看一眼二进制用 leanrea；需要看运行时或 hook 用 ida-reverse / asm-analysis；只看源码仓库架构时不要用本技能。",
+      "invoke": "skill({name:\"reverse-engineer-anything\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "static"
+        ],
+        [
+          "re",
+          "dynamic"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/rocm-doctor": {
+      "ref": "skill/rocm-doctor",
+      "name": "rocm-doctor",
+      "display": "ROCm/GPU 故障诊断",
+      "kind": "skill",
+      "traits": "诊断 ROCm、HIP SDK、PyTorch、llama.cpp 在 AMD GPU 上（Linux/Windows/WSL2）为什么坏，并给出低风险修复或下一步。也负责把 Lemonade/LM Studio/Ollama 的问题路由到正确的上游通道。",
+      "scenes": [
+        "用户报「ROCm 不工作了」、torch.cuda.is_available() 为 False",
+        "rocminfo / hipInfo 看不到 GPU",
+        "遇到 hipErrorNoBinaryForGpu、HSA_STATUS_ERROR_INVALID_ISA、invalid device function",
+        "Lemonade / LM Studio / Ollama 跑不起来要分流到正确通道"
+      ],
+      "avoid": "不是 AMD GPU / ROCm 环境不适用；只是想装 Quark 用 quark-install；单纯模型加载不到时不一定是 ROCm 问题。",
+      "invoke": "skill({name:\"rocm-doctor\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "code",
+          "debug"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/serving-llms-on-epyc": {
+      "ref": "skill/serving-llms-on-epyc",
+      "name": "serving-llms-on-epyc",
+      "display": "EPYC CPU 上跑 vLLM",
+      "kind": "skill",
+      "traits": "在 AMD EPYC 服务器 CPU 上用 vLLM 配 zentorch 跑模型（Docker/Podman/conda）。负责检测 EPYC 代际、校验运行时、检查模型支持与内存契合、算线程/KV/NUMA、确认方案后启动并验证；失败就报并停，不重试不调试。",
+      "scenes": [
+        "要在 AMD EPYC 服务器 CPU 上用 vLLM(zentorch) 跑模型",
+        "要在 Docker / Podman / conda 里起 CPU 推理服务",
+        "要检测 EPYC 代际、校验运行时、算显存/内存匹配、调线程/KV/NUMA",
+        "同一台机器上还有 AMD Instinct GPU，要分清跑哪里"
+      ],
+      "avoid": "�� AMD Instinct GPU 部署用 serving-llms-on-instinct；只调 kernel 用 magpie-kernel-evaluator。",
+      "invoke": "skill({name:\"serving-llms-on-epyc\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "code",
+          "build"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/serving-llms-on-instinct": {
+      "ref": "skill/serving-llms-on-instinct",
+      "name": "serving-llms-on-instinct",
+      "display": "AMD Instinct GPU 上跑 vLLM",
+      "kind": "skill",
+      "traits": "在 AMD Instinct GPU 上用 vLLM 部署与服务 AI 模型：选镜像、拉模型、算 TP/显存、起 openai 兼容 endpoint 并验证。",
+      "scenes": [
+        "要在 AMD GPU（MI300X/MI325X/MI350X/MI355X）上跑、起、部署、host 一个大模型",
+        "提到 ROCm 上的 vLLM、HBM 上服务",
+        "要把 Qwen3 / DeepSeek / 任意模型跑成一个 endpoint"
+      ],
+      "avoid": "在 EPYC CPU 上部署用 serving-llms-on-epyc；要量化模型用 quark-torch-llm-ptq；不是 AMD GPU 时选其他部署路线。",
+      "invoke": "skill({name:\"serving-llms-on-instinct\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "code",
+          "build"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/wbexpert__agent-orchestrator__github": {
+      "ref": "skill/wbexpert__agent-orchestrator__github",
+      "name": "wbexpert__agent-orchestrator__github",
+      "display": "wbexpert GitHub 操作",
+      "kind": "skill",
+      "traits": "GitHub CLI 的完整参考：仓库、issue、PR、Actions、projects、releases、gists、codespaces、组织、扩展，全部操作走 gh 命令行。",
+      "scenes": [
+        "要用 gh CLI 操作 GitHub 仓库、issue、PR",
+        "要查 Actions、projects、release、gist",
+        "要管 codespaces、organization、extension",
+        "要执行任何 GitHub 相关命令行操作"
+      ],
+      "avoid": "只看 GitHub 网页不涉 gh 命令时用 web_fetch；已有现成脚本时不必走这套封装。",
+      "invoke": "skill({name:\"wbexpert__agent-orchestrator__github\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "agent",
+          "skill"
+        ],
+        [
+          "code",
+          "git"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:11:41.075Z"
+    },
+    "skill/wbexpert__ai-image-prompt-engineer__canvas-design": {
+      "ref": "skill/wbexpert__ai-image-prompt-engineer__canvas-design",
+      "name": "wbexpert__ai-image-prompt-engineer__canvas-design",
+      "display": "canvas-design 视觉设计",
+      "kind": "skill",
+      "traits": "用设计哲学做视觉艺术：输出 .png 与 .pdf，适合海报、艺术图、封面、静态设计。强调原创而非复刻现有作品。",
+      "scenes": [
+        "要做海报、艺术作品、封面、静态设计稿",
+        "要产出 .png 或 .pdf 格式的视觉作品",
+        "要原创设计而不是拷贝现成作品"
+      ],
+      "avoid": "只要写 HTML/CSS 而不要求视觉质量时直接写；需要动效与营销文案深度结合时用 frontend-dev。",
+      "invoke": "skill({name:\"wbexpert__ai-image-prompt-engineer__canvas-design\"})",
+      "floor": 0,
+      "cap": 0.62,
+      "categories": [
+        [
+          "media",
+          "image"
+        ],
+        [
+          "media",
+          "ui"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__code-review-expert__capability-evolver": {
+      "ref": "skill/wbexpert__code-review-expert__capability-evolver",
+      "name": "wbexpert__code-review-expert__capability-evolver",
+      "display": "capability-evolver 自进化",
+      "kind": "skill",
+      "traits": "AI agent 自进化引擎：分析运行时历史，找出改进点，在协议约束下应用进化；经本地 Proxy 邮箱与 EvoMap Hub 通讯。",
+      "scenes": [
+        "要分析 agent 自身运行时历史找改进点",
+        "要在协议约束下做一次能力升级",
+        "要与 EvoMap Hub 通讯（经本地 Proxy 邮箱）"
+      ],
+      "avoid": "日常编码任务不需要自进化分析；不是运行时历史回顾的场景直接用普通重构。",
+      "invoke": "skill({name:\"wbexpert__code-review-expert__capability-evolver\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "agent",
+          "skill"
+        ],
+        [
+          "memory",
+          "mem"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__code-review-expert__frontend-dev": {
+      "ref": "skill/wbexpert__code-review-expert__frontend-dev",
+      "name": "wbexpert__code-review-expert__frontend-dev",
+      "display": "frontend-dev 全栈前端",
+      "kind": "skill",
+      "traits": "全栈前端开发：高级 UI 设计 + 电影级动效 + AI 生成媒体资源 + 转化文案 + 视觉艺术，产出视觉冲击强的完整页面。",
+      "scenes": [
+        "要做落地页、营销站、产品页、仪表盘",
+        "要高质量 UI + 电影感动效",
+        "要 AI 生成媒体资源（图/视/音/乐）并嵌入页面",
+        "要写转化型文案与生成艺术、实现滚动动效"
+      ],
+      "avoid": "只需纯静态页面时用 canvas-design 或直接写；不需要真实媒体素材的场合不必上这套流程。",
+      "invoke": "skill({name:\"wbexpert__code-review-expert__frontend-dev\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ],
+        [
+          "media",
+          "ui"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__code-review-expert__fullstack-dev": {
+      "ref": "skill/wbexpert__code-review-expert__fullstack-dev",
+      "name": "wbexpert__code-review-expert__fullstack-dev",
+      "display": "fullstack-dev 全栈架构",
+      "kind": "skill",
+      "traits": "全栈后端架构与前后端集成指南：REST API、service 层、错误处理、配置/鉴权、文件上传、实时通信，Node/Python 后端与 React 前端搭配。",
+      "scenes": [
+        "要搭全栈应用、REST API + 前端",
+        "要脚手架后端服务、做 CRUD/实时/聊天应用",
+        "Express + React、Next.js API、Node 或 Python 后端选型",
+        "要设计 service 层、错误处理、配置与鉴权、文件上传"
+      ],
+      "avoid": "小型单体脚本不必上全栈架构；只是后端 API 不涉前端时精简流程。",
+      "invoke": "skill({name:\"wbexpert__code-review-expert__fullstack-dev\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ],
+        [
+          "code",
+          "build"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__code-review-expert__impeccable": {
+      "ref": "skill/wbexpert__code-review-expert__impeccable",
+      "name": "wbexpert__code-review-expert__impeccable",
+      "display": "impeccable 高水准 UI",
+      "kind": "skill",
+      "traits": "创建有辨识度、生产级的前端界面：组件、页面、artifact、海报、应用。重点在配色排版与设计品味，避开通用 AI 风。",
+      "scenes": [
+        "要生产级、高设计质量的前端界面",
+        "要做 Web 组件、页面、artifact、海报或应用",
+        "要避免通用化 AI 审美、追求有辨识度的设计"
+      ],
+      "avoid": "只要功能可用不追求视觉质量时用普通前端流程；需要营销转化与媒体生成时用 frontend-dev。",
+      "invoke": "skill({name:\"wbexpert__code-review-expert__impeccable\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "media",
+          "ui"
+        ],
+        [
+          "code",
+          "edit"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__dev-ops-automation-engineer__agent-browser-core": {
+      "ref": "skill/wbexpert__dev-ops-automation-engineer__agent-browser-core",
+      "name": "wbexpert__dev-ops-automation-engineer__agent-browser-core",
+      "display": "agent-browser 网页自动化",
+      "kind": "skill",
+      "traits": "agent-browser CLI（Rust 实现，带 Node.js fallback）的使用手册：快照、元素 ref、结构化命令，面向 AI 友好的网页自动化。",
+      "scenes": [
+        "要用 AI 友好的网页自动化（快照、ref、结构化命令）",
+        "要一次性跑一串浏览器操作而不想写 Playwright 脚本",
+        "需要 Rust 版 CLI 或 Node.js fallback"
+      ],
+      "avoid": "只要用浏览器点几下、不涉 CLI 时用 webapp-testing 或 desktop_control；不需要快照/ref 语义能力时不必上这个 CLI。",
+      "invoke": "skill({name:\"wbexpert__dev-ops-automation-engineer__agent-browser-core\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "net",
+          "http"
+        ],
+        [
+          "auto",
+          "desktop"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__dev-ops-automation-engineer__ima-skills": {
+      "ref": "skill/wbexpert__dev-ops-automation-engineer__ima-skills",
+      "name": "wbexpert__dev-ops-automation-engineer__ima-skills",
+      "display": "IMA 笔记与知识库",
+      "kind": "skill",
+      "traits": "统一的 IMA OpenAPI 技能：笔记管理与知识库操作——上传文件、添加网页到知识库、搜索知识库、浏览/创建/编辑笔记。",
+      "scenes": [
+        "要往知识库上传文件或添加网页",
+        "要搜索知识库内容、浏览/创建/编辑笔记",
+        "用户说「帮我记一下」「搜一下知识库里有没有 XX」"
+      ],
+      "avoid": "只搜网页不需要知识库操作时用 web_search；不是 IMA 平台的内容不适用。",
+      "invoke": "skill({name:\"wbexpert__dev-ops-automation-engineer__ima-skills\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "memory",
+          "doc"
+        ],
+        [
+          "research",
+          "web"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__senior-developer__browser-use": {
+      "ref": "skill/wbexpert__senior-developer__browser-use",
+      "name": "wbexpert__senior-developer__browser-use",
+      "display": "browser-use 浏览器交互",
+      "kind": "skill",
+      "traits": "浏览器交互自动化：网页测试、表单填写、截图、数据抽取，对真实页面执行操作。",
+      "scenes": [
+        "要自动填表单、导航网站、截图、抽数据",
+        "要对真实网页做操作而不是只抓 HTML",
+        "要验证网页上的交互行为"
+      ],
+      "avoid": "要写可复用的浏览器脚本时用 agent-browser-core 或 webapp-testing；只是抓静态页面用 web_fetch。",
+      "invoke": "skill({name:\"wbexpert__senior-developer__browser-use\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "net",
+          "http"
+        ],
+        [
+          "auto",
+          "desktop"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__senior-project-manager__minimax-docx": {
+      "ref": "skill/wbexpert__senior-project-manager__minimax-docx",
+      "name": "wbexpert__senior-project-manager__minimax-docx",
+      "display": "minimax-docx Word 文档",
+      "kind": "skill",
+      "traits": "专业 DOCX 创建/编辑/格式化（OpenXML SDK）：三条管线——从零新建、填充编辑现有文档、套模板格式化并做 XSD 校验门槛。",
+      "scenes": [
+        "要新建、编辑或格式化 Word 文档",
+        "用户说「写个报告」「写个方案」「做份合同」「填这张表」",
+        "要把内容套进已有模板并做 XSD 校验"
+      ],
+      "avoid": "要写 Markdown 或纯文本时用 write；需要 PDF 转换时用 office 系列技能。",
+      "invoke": "skill({name:\"wbexpert__senior-project-manager__minimax-docx\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "data",
+          "text"
+        ],
+        [
+          "media",
+          "ui"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__seo-expert__anti-distill": {
+      "ref": "skill/wbexpert__seo-expert__anti-distill",
+      "name": "wbexpert__seo-expert__anti-distill",
+      "display": "anti-distill 技能防蒸馏",
+      "kind": "skill",
+      "traits": "技能反蒸馏防御：把技能文件处理成表面完整、核心专有知识已失效的版本，用于保护商业秘密、净化被强制的知识转移。",
+      "scenes": [
+        "要把自己的技能文件洗成「看起来完整但核心知识已中性化」",
+        "要保护商业秘密、防止被动知识转移",
+        "要交出一份可以安全提交的技能文档"
+      ],
+      "avoid": "要写进攻性内容时不用本技能；普通写作润色不涉防范不适用。",
+      "invoke": "skill({name:\"wbexpert__seo-expert__anti-distill\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "memory",
+          "doc"
+        ],
+        [
+          "agent",
+          "skill"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__seo-expert__fbs-bookwriter": {
+      "ref": "skill/wbexpert__seo-expert__fbs-bookwriter",
+      "name": "wbexpert__seo-expert__fbs-bookwriter",
+      "display": "福帮手写书工具链",
+      "kind": "skill",
+      "traits": "高质量长文档手稿工具链：书籍/手册/白皮书/行业指南/长篇报道/深度专题，支持联网查证、S/P/C/B 分层审校、中文排版、MD/HTML 导出、去 AI 味与图文书。",
+      "scenes": [
+        "要写书、手册、白皮书、行业指南、长篇报道或深度专题",
+        "要定大纲、逐章写、做 S/P/C/B 分层审校",
+        "要中文排版与 MD/HTML 交付",
+        "要写调查报道、特稿、拆书改写、海外本地化改写"
+      ],
+      "avoid": "写短文档或普通 Markdown 时不必上这套书稿工具链；纯数据报告用 consulting-analysis。",
+      "invoke": "skill({name:\"wbexpert__seo-expert__fbs-bookwriter\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "data",
+          "text"
+        ],
+        [
+          "research",
+          "web"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/wbexpert__seo-expert__multi-search-engine": {
+      "ref": "skill/wbexpert__seo-expert__multi-search-engine",
+      "name": "wbexpert__seo-expert__multi-search-engine",
+      "display": "multi-search-engine 多引擎搜索",
+      "kind": "skill",
+      "traits": "多搜索引擎集成：16 个引擎（7 中国 + 9 全球），支持高级搜索操作符、时间过滤、站内搜索、隐私引擎与 WolframAlpha 知识查询。",
+      "scenes": [
+        "要跨多个搜索引擎（7 国内 + 9 全球）比结果",
+        "要用高级搜索语法、时间过滤、站内搜索、隐私引擎",
+        "要 WolframAlpha 类知识计算"
+      ],
+      "avoid": "只要查单个网页内容用 web_fetch；只在 GitHub 上操作时用 gh-cli。",
+      "invoke": "skill({name:\"wbexpert__seo-expert__multi-search-engine\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "research",
+          "web"
+        ],
+        [
+          "net",
+          "http"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/expert-orchestration": {
+      "ref": "skill/expert-orchestration",
+      "name": "expert-orchestration",
+      "display": "expert-orchestration 专家编排",
+      "kind": "skill",
+      "traits": "专家编排协议的完整手册：每条消息先分诊（实施请求或上下文变化才重开全流程）、PM 先行规划、实施一律委派专家、任务板依赖调度、专家消息总线、分级交付门禁、经验池按需沉淀。",
+      "scenes": [
+        "要按专家编排协议开工（分诊 → PM 规划 → 委派 → 验收）",
+        "任务跨多个领域或产出多份产物需要拆解",
+        "要建任务板、挂依赖、调度专家、跑交付门禁"
+      ],
+      "avoid": "只需要调一个专家时用 summon_expert；只读问答不产生改动不必开全流程。",
+      "invoke": "skill({name:\"expert-orchestration\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "agent",
+          "team"
+        ],
+        [
+          "agent",
+          "dispatch"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/src-hunter": {
+      "ref": "skill/src-hunter",
+      "name": "src-hunter",
+      "display": "src-hunter SRC 漏洞挖掘",
+      "kind": "skill",
+      "traits": "SRC 漏洞挖掘 + 白盒 0day 审计全流程：JS 逆向接口发现、越权/注入/逻辑漏洞测试、WAF 绕过、白盒代码审计（Kernel/Chromium/Laravel/Spring/Django）、中文报告生成。",
+      "scenes": [
+        "要挖 SRC、找漏洞、测某站或某 APP 的安全性",
+        "要做 JS 逆向找接口、越权/注入/逻辑漏洞测试",
+        "要 WAF 绕过",
+        "要对 Linux Kernel / Chromium / Laravel / Spring / Django 做白盒 0day 审计",
+        "要写中文 SRC 漏洞报告"
+      ],
+      "avoid": "纯防御性代码审查用 security-code-auditor；只问安全概念不必开完整挖掘流程。",
+      "invoke": "skill({name:\"src-hunter\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "sec",
+          "web"
+        ],
+        [
+          "net",
+          "scan"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/chart-visualization": {
+      "ref": "skill/chart-visualization",
+      "name": "chart-visualization",
+      "display": "chart-visualization 图表",
+      "kind": "skill",
+      "traits": "数据可视化：从 26 种图表中智能选出最合适的一种，按参数规范提取数据，用 JS 脚本生成图表图片。",
+      "scenes": [
+        "要把一组数据画成图表",
+        "不确定该用哪种图表类型，要从 26 种里选最合适的",
+        "要用 JS 脚本生成一张图表图片"
+      ],
+      "avoid": "不是数据可视化时用 canvas-design 或 render_ui；只需一张静态图不必走 JS 脚本渲染。",
+      "invoke": "skill({name:\"chart-visualization\"})",
+      "floor": 0,
+      "cap": 0.66,
+      "categories": [
+        [
+          "media",
+          "ui"
+        ],
+        [
+          "data",
+          "text"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.729Z"
+    },
+    "skill/consulting-analysis": {
+      "ref": "skill/consulting-analysis",
+      "name": "consulting-analysis",
+      "display": "consulting-analysis 咨询报告",
+      "kind": "skill",
+      "traits": "专业研究报告生成两阶段法：先出结构化分析框架（章节骨架、数据查询需求、分析逻辑），数据收集完成后再出正式报告。面向市场/消费者/品牌/财务/行业/竞争情报/投资尽调。",
+      "scenes": [
+        "要写市场分析、消费者洞察、品牌分析、财务分析",
+        "要做行业研究、竞争情报、投资尽调",
+        "要任何咨询级分析报告",
+        "要先出分析框架与章节骨架再收集数据"
+      ],
+      "avoid": "只是想改的文案不涉调研时不必上咨询报告流程；单一数据表分析用 data-analysis。",
+      "invoke": "skill({name:\"consulting-analysis\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "research",
+          "web"
+        ],
+        [
+          "data",
+          "text"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/data-analysis": {
+      "ref": "skill/data-analysis",
+      "name": "data-analysis",
+      "display": "data-analysis 表格分析",
+      "kind": "skill",
+      "traits": "Excel/CSV 数据分析：多 sheet 工作簿、聚合、筛选、join、统计与透视，结果可导出 CSV/JSON/Markdown。",
+      "scenes": [
+        "用户上传了 Excel（.xlsx/.xls）或 CSV 要做分析",
+        "要做统计、汇总、透视表、SQL 查询",
+        "要多 sheet 工作簿、聚合、筛选、join",
+        "要把结果导出成 CSV/JSON/Markdown"
+      ],
+      "avoid": "非表格数据不适用；只要算个简单数字不必开完整流程。",
+      "invoke": "skill({name:\"data-analysis\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "data",
+          "db"
+        ],
+        [
+          "data",
+          "text"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/douyinpay-payment-integration": {
+      "ref": "skill/douyinpay-payment-integration",
+      "name": "douyinpay-payment-integration",
+      "display": "抖音支付接入",
+      "kind": "skill",
+      "traits": "抖音支付端到端接入助手：产品选型、前置准备、服务端 SDK 集成（Go/Java/PHP）、签名验签、代码生成与接入质量校验，覆盖 APP/JSAPI/H5/Native 支付与分账、退款、账单、回调、证书。",
+      "scenes": [
+        "要接入抖音支付（APP/JSAPI/H5/Native/分账）",
+        "要写 Go/Java/PHP 服务端 SDK 集成与签名验签",
+        "要处理退款、账单、回调通知、证书管理与错误码排查",
+        "提到 pay.douyinpay.com / api.douyinpay.com 域名配置"
+      ],
+      "avoid": "只做通用支付接入而不是抖音支付时不适用；不涉及签名与回调的纯前端展示不必用。",
+      "invoke": "skill({name:\"douyinpay-payment-integration\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ],
+        [
+          "net",
+          "http"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/frontend-design": {
+      "ref": "skill/frontend-design",
+      "name": "frontend-design",
+      "display": "frontend-design 生产级界面",
+      "kind": "skill",
+      "traits": "创建有辨识度、生产级的前端界面：组件、页面、artifact、海报、应用。重在设计质量与避免通用 AI 风。",
+      "scenes": [
+        "要构建 Web 组件、页面、artifact、海报或应用",
+        "要生产级、有高设计质量的界面",
+        "要避开通用化 AI 审美"
+      ],
+      "avoid": "只要功能可用不追求设计质量时直接写；要生成营销媒体素材时用 frontend-dev。",
+      "invoke": "skill({name:\"frontend-design\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "media",
+          "ui"
+        ],
+        [
+          "code",
+          "edit"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/gh-cli": {
+      "ref": "skill/gh-cli",
+      "name": "gh-cli",
+      "display": "gh-cli GitHub 命令行",
+      "kind": "skill",
+      "traits": "GitHub CLI 综合参考：仓库、issue、PR、Actions、projects、releases、gists、codespaces、组织、扩展，所有 GitHub 平台操作的命令写法。",
+      "scenes": [
+        "要用 gh 命令操作仓库、issue、PR、Actions",
+        "要管 projects、releases、gists、codespaces、organizations",
+        "要找 gh 子命令的准确写法"
+      ],
+      "avoid": "只在自有仓库本地腾挪时用 shell 的 git 命令；不是 GitHub 平台操作不适用。",
+      "invoke": "skill({name:\"gh-cli\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "git"
+        ],
+        [
+          "net",
+          "http"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/git-commit": {
+      "ref": "skill/git-commit",
+      "name": "git-commit",
+      "display": "git-commit 提交信息生成",
+      "kind": "skill",
+      "traits": "git 提交执行器：分析 diff 生成 conventional commit 信息、智能分组暂存、支持交互式指定 type/scope/description。",
+      "scenes": [
+        "要按 conventional commit 规范写提交信息并提交",
+        "要智能分组暂存文件",
+        "用户说「提交一下」「commit」「/commit」",
+        "要可选地指定 type/scope/description"
+      ],
+      "avoid": "用户没要求 commit 时不要自动提交；需要复杂分支策略时先用 git 命令手工处理。",
+      "invoke": "skill({name:\"git-commit\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "git"
+        ],
+        [
+          "auto",
+          "system"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/hook-analyzer-skill": {
+      "ref": "skill/hook-analyzer-skill",
+      "name": "hook-analyzer-skill",
+      "display": "视频筒子分析",
+      "kind": "skill",
+      "traits": "视频前三秒筒子分析：从分镜拆解结果抽前三秒数据，输出分镜数量、总时长与每个分镜详情（含关键帧 URL），为筒子吸引力评估提供上下文。",
+      "scenes": [
+        "要评估短视频前三秒的筒子吸引力",
+        "已有分镜拆解 JSON，要抽前三秒分镜数据",
+        "要跑 python scripts/analyze_hook_segments.py 做结构化分析"
+      ],
+      "avoid": "要直接分镜拆解或生成报告时另走对应技能；不是视频分析场景不适用。",
+      "invoke": "skill({name:\"hook-analyzer-skill\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "media",
+          "image"
+        ],
+        [
+          "data",
+          "text"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/iga-pages": {
+      "ref": "skill/iga-pages",
+      "name": "iga-pages",
+      "display": "IGA Pages 部署",
+      "kind": "skill",
+      "traits": "IGA Pages 部署与开发：前端/全栈/AI agent 项目上线，含 Pages Functions、日志、@iga-pages/agent 与 @iga-pages/blob。",
+      "scenes": [
+        "要把前端、全栈或 AI agent 项目部署到 IGA Pages",
+        "要用 Pages Functions、日志、@iga-pages/agent 或 @iga-pages/blob",
+        "要在 IGA Pages 上开发而不是只部署"
+      ],
+      "avoid": "只能部署到 IGA Pages 的场景不适用；纯静态页面不需要 Pages Functions 时精简流程。",
+      "invoke": "skill({name:\"iga-pages\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "build"
+        ],
+        [
+          "net",
+          "http"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/redis-development": {
+      "ref": "skill/redis-development",
+      "name": "redis-development",
+      "display": "Redis 开发与调优",
+      "kind": "skill",
+      "traits": "Redis 性能优化与最佳实践：数据结构选型、Redis Query Engine 向量检索（RedisVL）、语义缓存（LangCache）。",
+      "scenes": [
+        "要优化 Redis 性能与数据结构选型",
+        "要用 Redis Query Engine 做向量检索（RedisVL）",
+        "要做语义缓存（LangCache）",
+        "要 ReJSON/Redis Stack 类功能的正确用法"
+      ],
+      "avoid": "普通缓存需求不涉向量时不适用；不是 Redis 的环境不要硬套。",
+      "invoke": "skill({name:\"redis-development\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "data",
+          "db"
+        ],
+        [
+          "code",
+          "build"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/report-generator-skill": {
+      "ref": "skill/report-generator-skill",
+      "name": "report-generator-skill",
+      "display": "视频分析报告生成",
+      "kind": "skill",
+      "traits": "视频分析报告生成：整合分镜拆解数据与筒子分析结果，输出Markdown 报告（基本信息、前三秒筒子、分镜概览、BGM、场景）。",
+      "scenes": [
+        "已有分镜拆解与筒子分析结果，要合成完整 Markdown 报告",
+        "报告要含基本信息、前三秒筒子、分镜概览、BGM、场景分析章节"
+      ],
+      "avoid": "要写纯文本报告时用 write；要生成图片图表时用 chart-visualization。",
+      "invoke": "skill({name:\"report-generator-skill\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "data",
+          "text"
+        ],
+        [
+          "media",
+          "image"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/security-best-practices": {
+      "ref": "skill/security-best-practices",
+      "name": "security-best-practices",
+      "display": "security-best-practices 安全基線",
+      "kind": "skill",
+      "traits": "按语言与框架做安全最佳实践 review 并给改进建议。只覆盖 Python / JavaScript / TypeScript / Go，且仅在用户明确要求安全指导或安全审查时触发。",
+      "scenes": [
+        "用户明确要求安全最佳实践指导或安全 review 报告",
+        "要 secure-by-default 的编码建议",
+        "限定 Python / JavaScript / TypeScript / Go 四种语言"
+      ],
+      "avoid": "通用代码评审用 code-review 或 security-code-auditor；没有明确安全诉求时不必触发。",
+      "invoke": "skill({name:\"security-best-practices\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "sec",
+          "web"
+        ],
+        [
+          "code",
+          "debug"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/web-artifacts-builder": {
+      "ref": "skill/web-artifacts-builder",
+      "name": "web-artifacts-builder",
+      "display": "web-artifacts-builder 复杂 artifact",
+      "kind": "skill",
+      "traits": "构建复杂多组件 claude.ai HTML artifact：React、Tailwind CSS、shadcn/ui，支持状态管理与路由。不适合单文件简单 HTML/JSX。",
+      "scenes": [
+        "要做需要状态管理、路由或多组件的 claude.ai HTML artifact",
+        "要用 React + Tailwind + shadcn/ui 搭复杂产物",
+        "单文件 HTML/JSX 搞不定时"
+      ],
+      "avoid": "单文件简单 HTML/JSX 用 write 直接写；不需要状态管理的页面不必上这套工具链。",
+      "invoke": "skill({name:\"web-artifacts-builder\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ],
+        [
+          "media",
+          "ui"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/webapp-testing": {
+      "ref": "skill/webapp-testing",
+      "name": "webapp-testing",
+      "display": "webapp-testing Playwright",
+      "kind": "skill",
+      "traits": "用 Playwright 测本地 web 应用的工具箱：验证前端功能、调试 UI 行为、截浏览器图、看浏览器日志。",
+      "scenes": [
+        "要用 Playwright 测本地 web 应用",
+        "要验证前端功能、调试 UI 行为",
+        "要捕获浏览器截图与查看浏览器日志"
+      ],
+      "avoid": "只要抓静态页面内容用 web_fetch；需要视觉截图与断言时用 browser-use 或 screen_view。",
+      "invoke": "skill({name:\"webapp-testing\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "debug"
+        ],
+        [
+          "net",
+          "http"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:19.730Z"
+    },
+    "skill/character-creator": {
+      "ref": "skill/character-creator",
+      "name": "character-creator",
+      "display": "character-creator 角色创建",
+      "kind": "skill",
+      "traits": "角色创建技能：产出角色设定与人设文案。属于 hana 系列的创作类技能。",
+      "scenes": [
+        "要创建角色设定、人设文案或角色卡片",
+        "要为 agent 或项目做角色化包装"
+      ],
+      "avoid": "要真实可交付的角色设计交主模型自己写；仅供内部搭建代理人格时用。",
+      "invoke": "skill({name:\"character-creator\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "media",
+          "ui"
+        ],
+        [
+          "agent",
+          "skill"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:40.704Z"
+    },
+    "skill/hana-app-creator": {
+      "ref": "skill/hana-app-creator",
+      "name": "hana-app-creator",
+      "display": "hana 应用创建",
+      "kind": "skill",
+      "traits": "hana 系列的应用创建技能：在 hana 生态里生成应用/界面结构与实现。",
+      "scenes": [
+        "要在 hana 环境下造一个应用或界面原型",
+        "要把想法快速落成一个可看的东西"
+      ],
+      "avoid": "要做真实的移动端应用时用 dev-god 或 frontend-dev；仅原型演示时不必上完整工程。",
+      "invoke": "skill({name:\"hana-app-creator\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "code",
+          "edit"
+        ],
+        [
+          "media",
+          "ui"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:40.704Z"
+    },
+    "skill/office-suite-notes": {
+      "ref": "skill/office-suite-notes",
+      "name": "office-suite-notes",
+      "display": "Office 套件笔记",
+      "kind": "skill",
+      "traits": "Office 套件的笔记用法：用 excel/word/ppt 相关能力做办公笔记与文档整理。",
+      "scenes": [
+        "要用 Office 套件写笔记或整理办公文档",
+        "要在文档里记下结论与待办"
+      ],
+      "avoid": "要建真实 Word/Excel/PPT 文件时用 office 系列技能；只记笔记用 ima-skills 或 mnemon。",
+      "invoke": "skill({name:\"office-suite-notes\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "data",
+          "text"
+        ],
+        [
+          "memory",
+          "doc"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:40.704Z"
+    },
+    "skill/quiet-musing": {
+      "ref": "skill/quiet-musing",
+      "name": "quiet-musing",
+      "display": "quiet-musing 随想",
+      "kind": "skill",
+      "traits": "随想类写作技能：产出碎片化、发散型文本。属于 hana 创作系列。",
+      "scenes": [
+        "要写一段随想、碎片或無目标的思考",
+        "想用轻松的语气做发散创作"
+      ],
+      "avoid": "真实任务需要可靠输出时不要依赖；正式写作与报告走对应专门技能。",
+      "invoke": "skill({name:\"quiet-musing\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "data",
+          "text"
+        ],
+        [
+          "memory",
+          "mem"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:40.704Z"
+    },
+    "skill/recipe-creator": {
+      "ref": "skill/recipe-creator",
+      "name": "recipe-creator",
+      "display": "recipe-creator 菜谱创作",
+      "kind": "skill",
+      "traits": "菜谱创作技能：产出食材、步骤与做法描述的食谱文本。",
+      "scenes": [
+        "要设计一道菜的做法或写菜谱",
+        "要把食材与步骤整理成可执行的食谱"
+      ],
+      "avoid": "要做正式格式菜谱或完整食谱产品时不适用；只是闲聊食物不必加载。",
+      "invoke": "skill({name:\"recipe-creator\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "media",
+          "ui"
+        ],
+        [
+          "data",
+          "text"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:40.704Z"
+    },
+    "skill/reverse-skill": {
+      "ref": "skill/reverse-skill",
+      "name": "reverse-skill",
+      "display": "reverse-skill 逆向概论",
+      "kind": "skill",
+      "traits": "逆向工程概论型技能：逆向方法论、总体思路与入门指引（hana 系列）。不含具体工具命令与可执行流程。",
+      "scenes": [
+        "要看逆向的总体方法论与思路",
+        "需要一份逆向入门/概览式的指引"
+      ],
+      "avoid": "完整逆向流程用 xigong-auto-reverse / apk-reverse；要具体工具命令时用 ida-reverse / asm-analysis。",
+      "invoke": "skill({name:\"reverse-skill\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "re",
+          "route"
+        ],
+        [
+          "re",
+          "static"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:40.704Z"
+    },
+    "skill/scale-os-hana": {
+      "ref": "skill/scale-os-hana",
+      "name": "scale-os-hana",
+      "display": "scale-os hana 环境",
+      "kind": "skill",
+      "traits": "scale-os 与 hana 环境的操作约定：在该体系下如何跑系统任务与环境交互。",
+      "scenes": [
+        "要在 scale-os / hana 环境下做系统操作",
+        "要了解 hana 生态里的环境约定"
+      ],
+      "avoid": "不是 scale-os 体系的场景不适用；普通 Linux 任务用 shell / wsl。",
+      "invoke": "skill({name:\"scale-os-hana\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "agent",
+          "skill"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:40.704Z"
+    },
+    "skill/skill-creator": {
+      "ref": "skill/skill-creator",
+      "name": "skill-creator",
+      "display": "skill-creator 技能编写",
+      "kind": "skill",
+      "traits": "技能编写技能：如何写 SKILL.md（name/description 触发面 + 正文流程），如何设计目录结构与辅助文件，把流程沉淀成可复用技能。",
+      "scenes": [
+        "要从零写一个新技能（SKILL.md + 辅助文件）",
+        "要设计技能的触发描述与正文结构",
+        "要把一整套流程沉淀成可复用的技能"
+      ],
+      "avoid": "要建 DSH 技能时用 create_skill 工具；只改现成技能正文时直接 edit。",
+      "invoke": "skill({name:\"skill-creator\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "agent",
+          "skill"
+        ],
+        [
+          "code",
+          "edit"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:40.704Z"
+    },
+    "skill/uapi": {
+      "ref": "skill/uapi",
+      "name": "uapi",
+      "display": "uapi 接口调用",
+      "kind": "skill",
+      "traits": "uapi 接口的调用说明：参数、鉴权与请求方式。属于 hana 生态技能。",
+      "scenes": [
+        "要调 uapi 体系的接口",
+        "要看 uapi 的参数与鉴权方式"
+      ],
+      "avoid": "不是 uapi 体系的接口不适用；普通 HTTP 调试用 web_fetch 或 shell 的 curl。",
+      "invoke": "skill({name:\"uapi\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "net",
+          "http"
+        ],
+        [
+          "code",
+          "edit"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:40.704Z"
+    },
+    "skill/user-guide": {
+      "ref": "skill/user-guide",
+      "name": "user-guide",
+      "display": "user-guide 使用指引",
+      "kind": "skill",
+      "traits": "使用指引类技能：该环境的功能说明与入门指手册。",
+      "scenes": [
+        "需要一份该环境的使用指引或入门说明",
+        "不确定某个能力怎么用、想先看手册"
+      ],
+      "avoid": "具体任务直接做就好；只有需要入门指导时才加载。",
+      "invoke": "skill({name:\"user-guide\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "memory",
+          "doc"
+        ],
+        [
+          "agent",
+          "skill"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:40.704Z"
+    },
+    "skill/magpie-kernel-evaluator": {
+      "ref": "skill/magpie-kernel-evaluator",
+      "name": "magpie-kernel-evaluator",
+      "display": "Magpie GPU kernel 优化",
+      "kind": "skill",
+      "traits": "Magpie：LLM 推理 benchmark 与 GPU kernel 优化驱动。涵盖 vLLM/SGLang/Atom 压测、torch trace 抓取、TraceLens 后处理成 prefill/decode 与 roofline 报告、瓶颈 kernel 定位与 profiler 名→源码映射、HIP/CUDA/PyTorch/Triton kernel 分析与变体验证排序。",
+      "scenes": [
+        "要 benchmark vLLM / SGLang / Atom 推理性能",
+        "要抓 torch trace 并用 TraceLens 后处理成 prefill/decode 与 roofline 报告",
+        "要定位 top 瓶颈 kernel、把 profiler 名映回源码",
+        "要分析或对比 HIP / CUDA / PyTorch / Triton kernel",
+        "要验证并排序优化过的 kernel 变体（本地/容器/Ray）"
+      ],
+      "avoid": "不是 AMD GPU 性能剖析的场合用 tracelens-analysis-orchestrator；只部署模型不做 kernel 优化用 serving-llms-on-instinct。",
+      "invoke": "skill({name:\"magpie-kernel-evaluator\"})",
+      "floor": 0,
+      "cap": 0,
+      "categories": [
+        [
+          "auto",
+          "system"
+        ],
+        [
+          "code",
+          "build"
+        ]
+      ],
+      "updatedAt": "2026-11-16T15:12:55.159Z"
+    }
+  }
+}
